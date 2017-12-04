@@ -22,7 +22,7 @@ public class Conectar {
    // private static String dba = "unalm";
 private static String user = "root";
     private static String pass = "";
-    private static String url = "jdbc:mysql://localhost:3306/vuelos";
+    private static String url = "jdbc:mysql://localhost:3306/agencias_de_viajes";
     private static Connection conn;
     private static Connection x;
    
