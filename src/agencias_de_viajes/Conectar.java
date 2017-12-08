@@ -31,7 +31,7 @@ private static String user = "root";
             Class.forName("com.mysql.jdbc.Driver");
             conn=DriverManager.getConnection(url, user, pass);
             //conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/villalida","root","");
-            System.out.println("exito");
+          //  System.out.println("exito");
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null," Error En La Base De Datos " + e.getMessage());
 
