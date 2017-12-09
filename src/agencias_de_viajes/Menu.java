@@ -170,7 +170,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        Viajes v =new Viajes();
+        vuelo v =new vuelo();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed

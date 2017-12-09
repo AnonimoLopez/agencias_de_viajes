@@ -93,27 +93,25 @@ public class Consultas_sql_1 {
 //                    temp = busqueda[i][1];
 //                } catch (NumberFormatException ex) {
 //                    temp = "'" + busqueda[i][1] + "'";
-temp = "'" + busqueda[i][1] + "'";                   
-temp_b = busqueda[i][0] + "=" + temp;
+                temp = "'" + busqueda[i][1] + "'";
+                temp_b = busqueda[i][0] + "=" + temp;
 
-                    if (i < busqueda.length - 1) {
-                        temp_b += " AND ";
-                    }
+                if (i < busqueda.length - 1) {
+                    temp_b += " AND ";
+                }
 
-                    query += temp_b;
+                query += temp_b;
 //                }
             }
-            
-        }else {
-              query += "TRUE=TRUE";
-          }
 
-            //  if ()
-            //query += "TRUE = TRUE";
-        
+        } else {
+            query += "TRUE=TRUE";
+        }
 
-      System.out.println(query);
-          rs = st.executeQuery(query);
+        //  if ()
+        //query += "TRUE = TRUE";
+        System.out.println(query);
+        rs = st.executeQuery(query);
 
         return rs;
     }
@@ -131,7 +129,7 @@ temp_b = busqueda[i][0] + "=" + temp;
         ResultSet rs = x.search(name_table, null);
         if (rs != null) {
             while (rs.next()) {
-                System.out.println(rs.getString(1) + "-----" + rs.getString(2)+ "------" + rs.getString(4));
+                System.out.println(rs.getString(1) + "-----" + rs.getString(2) + "------" + rs.getString(4));
             }
         }
 
