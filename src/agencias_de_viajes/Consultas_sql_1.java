@@ -182,7 +182,7 @@ public class Consultas_sql_1 {
 //        valores[3][0] = "TELEFONO";valores[3][1] = "9932004038";
 //        
 //        x.insert("personas", valores);
-
+ //actualizr
 //        String valores[][] = new String[5][2];
 //        valores[0][0] = "NOMBRE";
 //        valores[0][1] = "JOSE1";

@@ -104,9 +104,25 @@ public class Destino extends javax.swing.JFrame {
             }
         });
 
+        txtCve_Continente.setEditable(false);
+
+        txt_Cve_pais.setEditable(false);
+
+        txt_cve_ciudad.setEditable(false);
+
         cbx_pais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_pais.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbx_paisItemStateChanged(evt);
+            }
+        });
 
         cbx_ciudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_ciudad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbx_ciudadItemStateChanged(evt);
+            }
+        });
 
         agregar_cotinente.setText("GUARDAR");
         agregar_cotinente.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +145,11 @@ public class Destino extends javax.swing.JFrame {
         jButton2.setText("NUEVO");
 
         jButton3.setText("NUEVO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -257,8 +278,10 @@ public class Destino extends javax.swing.JFrame {
             String valor[] = (cbx_continente.getSelectedItem().toString()).split("-");
             txtCve_Continente.setText(valor[0]);
             txt_continente.setText(valor[1]);
-
+            
             cargar_pais();
+            System.out.println("----entro aqui");
+            Llenar();
         } catch (SQLException ex) {
             Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -274,39 +297,93 @@ public class Destino extends javax.swing.JFrame {
 
             sent = conn.createStatement();
             ResultSet rs = sent.executeQuery(sql);
-            while (rs.next()) {
-                model_combox.addElement(rs.getString(1));
-            }
-            cbx_pais.setModel(model_combox);
+            if (rs != null) {
+                Boolean stado = true;
+                while (rs.next()) {
+                    model_combox.addElement(rs.getString(1));
+                    stado = false;
+                }
 
-            valor = (cbx_pais.getSelectedItem().toString()).split("-");
-            txt_Cve_pais.setText(valor[0]);
-            txt_pais.setText(valor[1]);
-           cargar_ciudad();
+                if (stado) {
+                    System.out.println("----entro is null---");
+                    model_combox.addElement("");
+                    cbx_pais.setModel(model_combox);
+                    txt_Cve_pais.setText("");
+                    txt_pais.setText("");
+                    limpiar_ciudad();
+                    estado_ciudad(false);
+                   
+                } else {
+                    estado_ciudad(true);
+                    cbx_pais.setModel(model_combox);
+                    valor = (cbx_pais.getSelectedItem().toString()).split("-");
+                    txt_Cve_pais.setText(valor[0]);
+                    txt_pais.setText(valor[1]);
+                    
+                   cargar_ciudad();
+                }
+                 
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-        public void cargar_ciudad() {
+
+    void estado_ciudad(Boolean estado) {
+        cbx_ciudad.enable(estado);
+        txt_ciudad.enable(estado);
+        txt_cve_ciudad.enable(estado);
+        agregar_ciudad.enable(estado);
+
+    }
+
+    void limpiar_ciudad(){
+         DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
+         model_combox.addElement("");
+                    cbx_ciudad.setModel(model_combox);
+                    txt_cve_ciudad.setText("");
+                    txt_ciudad.setText("");
+    }
+    public void cargar_ciudad() {
         try {
             DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
             String valor[] = (cbx_pais.getSelectedItem().toString()).split("-");
-
+     
             String sql = "";
             sql = "SELECT CONCAT (CVE_CIuDAD,'-',NOMBRE) FROM ciudad where cve_PAIS  = " + valor[0];
             System.out.println(sql);
             sent = conn.createStatement();
             ResultSet rs = sent.executeQuery(sql);
-            while (rs.next()) {
-                model_combox.addElement(rs.getString(1));
-            }
-            cbx_ciudad.setModel(model_combox);
+            System.out.println(sql);
+            if (rs != null) {
+                System.out.println("----x-----");
+                System.out.println(rs.getRow());
+                Boolean stado = true;
+                while (rs.next()) {
+                    model_combox.addElement(rs.getString(1));
+                    stado = false;
+                }
+                if (stado) {
+                    System.out.println("----entro is null---");
+                    model_combox.addElement("");
+                    cbx_ciudad.setModel(model_combox);
+                    txt_cve_ciudad.setText("");
+                    txt_ciudad.setText("");
+                } else {
+                    System.out.println("----entro full hd");
+                    cbx_ciudad.setModel(model_combox);
+                    valor = (cbx_ciudad.getSelectedItem().toString()).split("-");
+                    txt_cve_ciudad.setText(valor[0]);
+                    txt_ciudad.setText(valor[1]);
+                }
 
-            valor = (cbx_ciudad.getSelectedItem().toString()).split("-");
-            txt_cve_ciudad.setText(valor[0]);
-            txt_ciudad.setText(valor[1]);
+            } else {
+                System.out.println("----entro is null---");
+                model_combox.addElement("");
+                cbx_ciudad.setModel(model_combox);
+                txt_cve_ciudad.setText("");
+                txt_ciudad.setText("");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
@@ -314,6 +391,7 @@ public class Destino extends javax.swing.JFrame {
     }
     private void cbx_continenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_continenteItemStateChanged
         cargar_pais();
+        Llenar();
     }//GEN-LAST:event_cbx_continenteItemStateChanged
 
     private void agregar_cotinenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_cotinenteActionPerformed
@@ -321,9 +399,91 @@ public class Destino extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_cotinenteActionPerformed
 
     private void agregar_ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ciudadActionPerformed
-        // TODO add your handling code here:
+             if (txt_ciudad.getText().equals("")){
+               JOptionPane.showMessageDialog(this, "POR FAVOR INGRESE UNA CIUDAD");
+         
+                
+             }else{
+                   Consultas_sql_1 x = new Consultas_sql_1();
+        if (txt_cve_ciudad.getText().equals("")){
+            System.out.println(".........c.......");
+        String valor[] = (cbx_pais.getSelectedItem().toString()).split("-");
+        String valores[][] = new String[2][2];
+        valores[0][0] = "NOMBRE";valores[0][1] = txt_ciudad.getText();
+        valores[1][0] = "cve_pais";valores[1][1] = valor[0]; 
+        x.insert("ciudad", valores);   // TODO add your handling code here:
+        cargar_ciudad();
+            
+        }else{
+              String valores[][] = new String[2][2];
+        valores[0][0] = "NOMBRE";
+        valores[0][1] = txt_ciudad.getText();
+        valores[1][0] = "cve_ciudad";
+        valores[1][1] = txt_cve_ciudad.getText();    
+        x.update("ciudad", valores);
+        cargar_ciudad();
+        }
+        
+        Llenar();
+             }
     }//GEN-LAST:event_agregar_ciudadActionPerformed
 
+    private void cbx_paisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_paisItemStateChanged
+        // TODO add your handling code here:
+        cargar_ciudad();
+    }//GEN-LAST:event_cbx_paisItemStateChanged
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        txt_ciudad.setText("");
+        txt_cve_ciudad.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void cbx_ciudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_ciudadItemStateChanged
+          String valor[] = (cbx_ciudad.getSelectedItem().toString()).split("-");
+                    txt_cve_ciudad.setText(valor[0]);
+                    txt_ciudad.setText(valor[1]);   // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_ciudadItemStateChanged
+ void Llenar() {
+
+        try {
+
+            conn = Conectar.geConnection();
+            String valor[] = (cbx_continente.getSelectedItem().toString()).split("-");
+
+            String[] titulos = {"CONTINENTE", "PAIS", "CIUDAD"};
+            String sql = "SELECT concat(continente.CVE_CONTINENTE,'-' ,continente.NOMBRE),  concat(pais.CVE_PAIS,'-' ,pais.NOMBRE), concat(ciudad.CVE_ciudad,'-' ,ciudad.NOMBRE)\n" +
+"FROM CONTINENTE inner join PAIS on continente.cve_continente = pais.cve_continente inner join CIUDAD  on pais. cve_pais=  ciudad.cve_pais\n" +
+"where continente.CVE_CONTINENTE = " + valor[0];
+
+            System.out.println(sql);
+            mode1 = new DefaultTableModel(null, titulos){
+                        @Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+            sent = conn.createStatement();
+            ResultSet rs = sent.executeQuery(sql);
+
+            String[] fila = new String[3];
+            while (rs.next()) {
+                fila[0] = rs.getString(1);
+                fila[1] = rs.getString(2);
+                fila[2] = rs.getString(3);
+             
+
+                
+                mode1.addRow(fila);
+            }
+           
+            jTable1.setModel(mode1);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
