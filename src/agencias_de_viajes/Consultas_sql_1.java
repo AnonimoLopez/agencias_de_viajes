@@ -144,7 +144,7 @@ public class Consultas_sql_1 {
         }
 
         sql += colum;
-
+        System.out.println(sql);
         try {
             ps = conn.prepareStatement(sql);
             ps.executeUpdate();
@@ -183,18 +183,18 @@ public class Consultas_sql_1 {
 //        
 //        x.insert("personas", valores);
 
-        String valores[][] = new String[5][2];
-        valores[0][0] = "NOMBRE";
-        valores[0][1] = "JOSE1";
-        valores[1][0] = "PATERNO";
-        valores[1][1] = "LOPEZ";
-        valores[2][0] = "MATERNO";
-        valores[2][1] = "MARTINES";
-        valores[3][0] = "TELEFONO";
-        valores[3][1] = "9932004038";
-        valores[4][0] = "CVE_PERSONA";
-        valores[4][1] = "1";
-        x.update("personas", valores);
+//        String valores[][] = new String[5][2];
+//        valores[0][0] = "NOMBRE";
+//        valores[0][1] = "JOSE1";
+//        valores[1][0] = "PATERNO";
+//        valores[1][1] = "LOPEZ";
+//        valores[2][0] = "MATERNO";
+//        valores[2][1] = "MARTINES";
+//        valores[3][0] = "TELEFONO";
+//        valores[3][1] = "9932004038";
+//        valores[4][0] = "CVE_PERSONA";
+//        valores[4][1] = "1";
+//        x.update("personas", valores);
 
     }
 }

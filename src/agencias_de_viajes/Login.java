@@ -27,6 +27,9 @@ public class Login extends javax.swing.JFrame {
     User user_data = new User();
     public Login() {
         initComponents();
+        user.setText("pepe12345");
+        password.setText("jose");
+        
     }
 
     /**

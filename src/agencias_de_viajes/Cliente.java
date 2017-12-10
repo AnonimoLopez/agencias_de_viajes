@@ -24,7 +24,7 @@ public class Cliente extends javax.swing.JFrame {
     DefaultTableModel mode1;
     Connection conn;
     Statement sent;
-     Consultas_sql_1 x = new Consultas_sql_1();
+    Consultas_sql_1 x = new Consultas_sql_1();
     public User user_data;
 
     /**
@@ -33,23 +33,20 @@ public class Cliente extends javax.swing.JFrame {
     public Cliente() {
         initComponents();
         conn = Conectar.geConnection();
-       // Llenar_combox();
+        // Llenar_combox();
 
     }
-    
-    public Cliente(User user) throws SQLException{
+
+    public Cliente(User user) throws SQLException {
         initComponents();
         conn = Conectar.geConnection();
         user_data = user;
         Llenar_combox();
     }
-    
 
     void Llenar_combox() throws SQLException {
-    DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
-      
-     
-        
+        DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
+
         String sql = "";
         if (user_data.getTipo_empleado() == 1) {
             sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_usuario";
@@ -57,16 +54,15 @@ public class Cliente extends javax.swing.JFrame {
             sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_usuario where cve_tipo_usuario = 3 ";
         } else if (user_data.getTipo_empleado() == 3) {
             tipo_empleado.setVisible(false);
-          }
-       
-           sent = conn.createStatement();
-            ResultSet rs = sent.executeQuery(sql);
-            while (rs.next()) {
-               model_combox.addElement(rs.getString(1));
-            }
-            tipo_empleado.setModel(model_combox);
-        
-        
+        }
+
+        sent = conn.createStatement();
+        ResultSet rs = sent.executeQuery(sql);
+        while (rs.next()) {
+            model_combox.addElement(rs.getString(1));
+        }
+        tipo_empleado.setModel(model_combox);
+
         Llenar();
     }
 
@@ -76,30 +72,42 @@ public class Cliente extends javax.swing.JFrame {
 
             conn = Conectar.geConnection();
             String valor[] = (tipo_empleado.getSelectedItem().toString()).split("-");
-            
-            String[] titulos = {"CVE_PERSONA", "NOMBRE", "PATERNO", "MATERNO", "TELEFONO", "USUARIO", "PASSWORD"};
+
+            String[] titulos = {"CVE_PERSONA", "NOMBRE", "PATERNO", "MATERNO", "TELEFONO", "EMAIL", "USUARIO", "PASSWORD", "ESTATUS"};
             String sql = "SELECT * FROM personas inner join usuario on CVE_PERSONA = CVE_USUARIO WHERE usuario.CVE_TIPO_USUARIO = " + valor[0];
-          
+
             System.out.println(sql);
-            mode1 = new DefaultTableModel(null, titulos);
-            
-            
-            
+            mode1 = new DefaultTableModel(null, titulos){
+                        @Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
             sent = conn.createStatement();
             ResultSet rs = sent.executeQuery(sql);
 
-            String[] fila = new String[7];
+            String[] fila = new String[9];
             while (rs.next()) {
                 fila[0] = rs.getString("CVE_PERSONA");
                 fila[1] = rs.getString("NOMBRE");
                 fila[2] = rs.getString("PATERNO");
                 fila[3] = rs.getString("MATERNO");
                 fila[4] = rs.getString("TELEFONO");
-                fila[5] = rs.getString("USUARIO");
-                fila[6] = rs.getString("PASSWORD");
+                fila[5] = rs.getString("EMAIL");
+                fila[6] = rs.getString("USUARIO");
+                fila[7] = rs.getString("PASSWORD");
+
+                if (rs.getBoolean("STATUS") == true) {
+                    fila[8] = "ACTIVO";
+                } else {
+                    fila[8] = "INACTIVO";
+                }
                 mode1.addRow(fila);
             }
+           
             jTable1.setModel(mode1);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -212,9 +220,16 @@ public class Cliente extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTable1.setUpdateSelectionOnSort(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -233,7 +248,7 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
 
-        btnEliminar.setText("Eliminar");
+        btnEliminar.setText("DESABILITAR");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -384,62 +399,102 @@ public class Cliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        if (evt.getButton() == 1) {
-
+    private void asigar_datos(){
             int row = jTable1.getSelectedRow();
             cve_persona.setText(jTable1.getValueAt(row, 0).toString());
             nom1.setText(jTable1.getValueAt(row, 1).toString());
             apa1.setText(jTable1.getValueAt(row, 2).toString());
             ama1.setText(jTable1.getValueAt(row, 3).toString());
             tel1.setText(jTable1.getValueAt(row, 4).toString());
-            txt_usuario.setText(jTable1.getValueAt(row, 5).toString());
-            txtPassword.setText(jTable1.getValueAt(row, 6).toString());
+            mai1.setText(jTable1.getValueAt(row, 5).toString());
+            txt_usuario.setText(jTable1.getValueAt(row, 6).toString());
+            txtPassword.setText(jTable1.getValueAt(row, 7).toString());
+            if (jTable1.getValueAt(row, 8).toString().equals("ACTIVO")) {
+                btnEliminar.setText("DESABILITAR");
+            } else {
+                btnEliminar.setText("HABILITAR");
+            }
+
+    }
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getButton() == 1) {
+            
+          asigar_datos();
 //            mai1.setText(jTable1.getValueAt(row, 5).toString());
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-        try {
-            int datos = jTable1.getSelectedRow();
-            String sql = "delete from `personas` where `CVE_PERSONA` = " + jTable1.getValueAt(datos, 0);
-            sent = conn.createStatement();
-            int n = sent.executeUpdate(sql);
-            if (n > 0) {
-                Llenar();
-
+        String valores[][] = new String[6][2];
+        valores = new String[2][2];
+        String status  = "0";
+        if (btnEliminar.getText().toString().equals("DESABILITAR")) {
+               status = "0";
+            } else {
+               status = "1";
             }
-            JOptionPane.showMessageDialog(null, "Datos eliminados");
+        
+        valores[0][0] = "STATUS";
+        valores[0][1] = status;
+        valores[1][0] = "CVE_USUARIO";
+        valores[1][1] = cve_persona.getText();
+        x.update("usuario", valores);
+        
+        Llenar();
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
-        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            String sql = "UPDATE `agencias_de_viajes`.`personas` SET  NOMBRE = ?, PATERNO = ?, MATERNO = ?, TELEFONO = ?, E-mail = ?   WHERE  Id_Viajes = ?";
-            int datos = jTable1.getSelectedRow();
-            String dao = (String) jTable1.getValueAt(datos, 0);
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, nom1.getText());
-            ps.setString(2, apa1.getText());
-            ps.setString(3, ama1.getText());
-            ps.setString(4, tel1.getText());
-            ps.setString(5, mai1.getText());
+            if (cve_persona.getText().equals("")) {
+                String valor[] = (tipo_empleado.getSelectedItem().toString()).split("-");
+                String valores[][] = new String[5][2];
+                valores[0][0] = "NOMBRE";
+                valores[0][1] = nom1.getText();
+                valores[1][0] = "PATERNO";
+                valores[1][1] = apa1.getText();
+                valores[2][0] = "MATERNO";
+                valores[2][1] = ama1.getText();
+                valores[3][0] = "TELEFONO";
+                valores[3][1] = tel1.getText();
+                valores[4][0] = "Email";
+                valores[4][1] = mai1.getText();
+                x.insert("personas", valores);
 
-//ps.setString(1, paq1.getText());
-            ps.setString(1, dao);
-            // System.out.println(sql);
-            int n = ps.executeUpdate();
-            if (n > 0) {
-                Limpiar();
-                Llenar();
-                JOptionPane.showMessageDialog(null, "Datos Modificados");
+                valores = new String[3][2];
+                valores[0][0] = "usuario";
+                valores[0][1] = txt_usuario.getText();
+                valores[1][0] = "password";
+                valores[1][1] = txtPassword.getText();
+                valores[2][0] = "CVE_TIPO_USUARIO";
+                valores[2][1] = valor[0];
+                x.insert("usuario", valores);
+            } else {
+                String valores[][] = new String[6][2];
+                valores[0][0] = "NOMBRE";
+                valores[0][1] = nom1.getText();
+                valores[1][0] = "PATERNO";
+                valores[1][1] = apa1.getText();
+                valores[2][0] = "MATERNO";
+                valores[2][1] = ama1.getText();
+                valores[3][0] = "TELEFONO";
+                valores[3][1] = tel1.getText();
+                valores[4][0] = "e-mail";
+                valores[4][1] = mai1.getText();
+                valores[5][0] = "CVE_PERSONA";
+                valores[5][1] = cve_persona.getText();
+                x.update("personas", valores);
+                valores = new String[3][2];
+                valores[0][0] = "usuario";
+                valores[0][1] = txt_usuario.getText();
+                valores[1][0] = "password";
+                valores[1][1] = txtPassword.getText();
+                valores[2][0] = "CVE_USUARIO";
+                valores[2][1] = cve_persona.getText();
+                x.update("usuario", valores);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
@@ -448,39 +503,56 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void tipo_empleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo_empleadoItemStateChanged
-      if (user_data != null){
-          Llenar();
-      }
+        if (user_data != null) {
+            Llenar();
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_tipo_empleadoItemStateChanged
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-     Limpiar();
+        Limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void txt_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usuarioKeyPressed
-      
 
         String name_table = "usuario";
         String busqueda[][] = new String[1][2];
         busqueda[0][0] = "usuario";
         busqueda[0][1] = txt_usuario.getText();
-     
+
         ResultSet rs;
         try {
             rs = x.search(name_table, busqueda);
-             if (rs != null) {
-            while (rs.next()) {
-                 label_message_user.setText("USUARIO NO DISPONIBLE");
-            }
-        }else {
+            if (rs != null) {
+                while (rs.next()) {
+                    label_message_user.setText("USUARIO NO DISPONIBLE");
+                }
+            } else {
                 label_message_user.setText("");
-             }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }//GEN-LAST:event_txt_usuarioKeyPressed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+             int row = jTable1.getSelectedRow();
+            cve_persona.setText(jTable1.getValueAt(row, 0).toString());
+            nom1.setText(jTable1.getValueAt(row, 1).toString());
+            apa1.setText(jTable1.getValueAt(row, 2).toString());
+            ama1.setText(jTable1.getValueAt(row, 3).toString());
+            tel1.setText(jTable1.getValueAt(row, 4).toString());
+            mai1.setText(jTable1.getValueAt(row, 5).toString());
+            txt_usuario.setText(jTable1.getValueAt(row, 6).toString());
+            txtPassword.setText(jTable1.getValueAt(row, 7).toString());
+            if (jTable1.getValueAt(row, 8).toString().equals("ACTIVO")) {
+                btnEliminar.setText("DESABILITAR");
+            } else {
+                btnEliminar.setText("HABILITAR");
+            }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyPressed
 
     /**
      * @param args the command line arguments
