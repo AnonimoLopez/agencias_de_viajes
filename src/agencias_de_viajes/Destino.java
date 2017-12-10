@@ -4,27 +4,35 @@
  * and open the template in the editor.
  */
 package agencias_de_viajes;
+
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+
 /**
  *
  * @author flavioantonio
  */
 public class Destino extends javax.swing.JFrame {
-DefaultTableModel mode1;
+
+    DefaultTableModel mode1;
     Connection conn;
     Statement sent;
+
     /**
-     * Creates new form Destino
-//     */
-//    public Destino() {
-//        initComponents();
-//        conn = Conectar.geConnection();
-//        Llenar();
-//    }
+     * Creates new form Destino //
+     */
+    public Destino() {
+        initComponents();
+        conn = Conectar.geConnection();
+        cargar_continente();
+        // Llenar();
+    }
 //     void Desahabilitar() {
 //
 //        nom1.setEditable(false);
@@ -61,15 +69,18 @@ DefaultTableModel mode1;
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txt_continente = new javax.swing.JTextField();
+        txt_pais = new javax.swing.JTextField();
+        txt_ciudad = new javax.swing.JTextField();
+        cbx_continente = new javax.swing.JComboBox<>();
         txtCve_Continente = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        txt_Cve_pais = new javax.swing.JTextField();
+        txt_cve_ciudad = new javax.swing.JTextField();
+        cbx_pais = new javax.swing.JComboBox<>();
+        cbx_ciudad = new javax.swing.JComboBox<>();
+        agregar_cotinente = new javax.swing.JButton();
+        agregar_pais = new javax.swing.JButton();
+        agregar_ciudad = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -86,21 +97,38 @@ DefaultTableModel mode1;
 
         jLabel3.setText("Ciudad");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_continente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_continente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbx_continenteItemStateChanged(evt);
+            }
+        });
 
-        jTextField5.setText("jTextField5");
+        cbx_pais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField6.setText("jTextField6");
+        cbx_ciudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        agregar_cotinente.setText("GUARDAR");
+        agregar_cotinente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar_cotinenteActionPerformed(evt);
+            }
+        });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        agregar_pais.setText("GUARDAR");
 
-        jButton1.setText("jButton1");
+        agregar_ciudad.setText("GUARDAR");
+        agregar_ciudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar_ciudadActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        jButton1.setText("NUEVO");
 
-        jButton3.setText("jButton3");
+        jButton2.setText("NUEVO");
+
+        jButton3.setText("NUEVO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,27 +146,30 @@ DefaultTableModel mode1;
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(agregar_cotinente, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(cbx_continente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_continente)
                             .addComponent(txtCve_Continente))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbx_pais, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField5))))
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(agregar_pais, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(txt_pais)
+                                    .addComponent(txt_Cve_pais))))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField6)
-                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txt_ciudad)
+                            .addComponent(txt_cve_ciudad)
+                            .addComponent(cbx_ciudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(agregar_ciudad, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,25 +181,30 @@ DefaultTableModel mode1;
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbx_continente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_pais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCve_Continente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Cve_pais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_cve_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_continente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_pais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(agregar_cotinente)
+                    .addComponent(agregar_pais)
+                    .addComponent(agregar_ciudad))
+                .addContainerGap())
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -197,11 +233,96 @@ DefaultTableModel mode1;
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 53, Short.MAX_VALUE))
+                .addGap(0, 48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cargar_continente() {
+        try {
+            DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
+
+            String sql = "";
+
+            sql = "SELECT CONCAT (CVE_CONTINENTE,'-',NOMBRE) FROM continente";
+
+            sent = conn.createStatement();
+            ResultSet rs = sent.executeQuery(sql);
+            while (rs.next()) {
+                model_combox.addElement(rs.getString(1));
+            }
+            cbx_continente.setModel(model_combox);
+
+            String valor[] = (cbx_continente.getSelectedItem().toString()).split("-");
+            txtCve_Continente.setText(valor[0]);
+            txt_continente.setText(valor[1]);
+
+            cargar_pais();
+        } catch (SQLException ex) {
+            Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void cargar_pais() {
+        try {
+            DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
+            String valor[] = (cbx_continente.getSelectedItem().toString()).split("-");
+
+            String sql = "";
+            sql = "SELECT CONCAT (CVE_PAIS,'-',NOMBRE) FROM pais where cve_continente = " + valor[0];
+
+            sent = conn.createStatement();
+            ResultSet rs = sent.executeQuery(sql);
+            while (rs.next()) {
+                model_combox.addElement(rs.getString(1));
+            }
+            cbx_pais.setModel(model_combox);
+
+            valor = (cbx_pais.getSelectedItem().toString()).split("-");
+            txt_Cve_pais.setText(valor[0]);
+            txt_pais.setText(valor[1]);
+           cargar_ciudad();
+        } catch (SQLException ex) {
+            Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+        public void cargar_ciudad() {
+        try {
+            DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
+            String valor[] = (cbx_pais.getSelectedItem().toString()).split("-");
+
+            String sql = "";
+            sql = "SELECT CONCAT (CVE_CIuDAD,'-',NOMBRE) FROM ciudad where cve_PAIS  = " + valor[0];
+            System.out.println(sql);
+            sent = conn.createStatement();
+            ResultSet rs = sent.executeQuery(sql);
+            while (rs.next()) {
+                model_combox.addElement(rs.getString(1));
+            }
+            cbx_ciudad.setModel(model_combox);
+
+            valor = (cbx_ciudad.getSelectedItem().toString()).split("-");
+            txt_cve_ciudad.setText(valor[0]);
+            txt_ciudad.setText(valor[1]);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void cbx_continenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_continenteItemStateChanged
+        cargar_pais();
+    }//GEN-LAST:event_cbx_continenteItemStateChanged
+
+    private void agregar_cotinenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_cotinenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregar_cotinenteActionPerformed
+
+    private void agregar_ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ciudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregar_ciudadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,23 +360,26 @@ DefaultTableModel mode1;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregar_ciudad;
+    private javax.swing.JButton agregar_cotinente;
+    private javax.swing.JButton agregar_pais;
+    private javax.swing.JComboBox<String> cbx_ciudad;
+    private javax.swing.JComboBox<String> cbx_continente;
+    private javax.swing.JComboBox<String> cbx_pais;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField txtCve_Continente;
+    private javax.swing.JTextField txt_Cve_pais;
+    private javax.swing.JTextField txt_ciudad;
+    private javax.swing.JTextField txt_continente;
+    private javax.swing.JTextField txt_cve_ciudad;
+    private javax.swing.JTextField txt_pais;
     // End of variables declaration//GEN-END:variables
 }
