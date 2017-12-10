@@ -52,9 +52,9 @@ public class Cliente extends javax.swing.JFrame {
         
         String sql = "";
         if (user_data.getTipo_empleado() == 1) {
-            sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_empleado";
+            sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_usuario";
         } else if (user_data.getTipo_empleado() == 2) {
-            sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_empleado where cve_tipo_empleado <> 1 ";
+            sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_usuario where cve_tipo_usuario = 3 ";
         } else if (user_data.getTipo_empleado() == 3) {
             tipo_empleado.setVisible(false);
           }
@@ -78,7 +78,7 @@ public class Cliente extends javax.swing.JFrame {
             String valor[] = (tipo_empleado.getSelectedItem().toString()).split("-");
             
             String[] titulos = {"CVE_PERSONA", "NOMBRE", "PATERNO", "MATERNO", "TELEFONO", "USUARIO", "PASSWORD"};
-            String sql = "SELECT * FROM personas inner join usuario on CVE_PERSONA = CVE_USUARIO WHERE usuario.CVE_TIPO_EMPLEADO = " + valor[0];
+            String sql = "SELECT * FROM personas inner join usuario on CVE_PERSONA = CVE_USUARIO WHERE usuario.CVE_TIPO_USUARIO = " + valor[0];
           
             System.out.println(sql);
             mode1 = new DefaultTableModel(null, titulos);

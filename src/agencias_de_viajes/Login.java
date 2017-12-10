@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -61,6 +62,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Registrar");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,7 +142,7 @@ public class Login extends javax.swing.JFrame {
                     while (rs.next()) {
                        user_data.setCve_user(rs.getString("cve_usuario"));
                        user_data.setUser(rs.getString("usuario"));
-                       user_data.setTipo_empleado(rs.getInt("cve_tipo_empleado"));
+                       user_data.setTipo_empleado(rs.getInt("cve_tipo_usuario"));
                     }
                     System.out.println( "-" +user_data.getTipo_empleado());
                     Menu m = new Menu(user_data);
@@ -151,6 +157,16 @@ public class Login extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+       // JLabel.setText("<html><a href="http:www.google.com/">Enlace</a></html>");
+       Cliente c = new Cliente();
+       c.setVisible(true);
+       dispose();
+               
+
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
