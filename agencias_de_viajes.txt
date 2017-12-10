@@ -1,0 +1,156 @@
+Updatecheck<|||>3<|||>1
+DoUsageStatistics<|||>3<|||>1
+UpdatecheckLastrun<|||>1<|||>2017-12-08 12:47:31
+LastUsageStatisticCall<|||>1<|||>2017-12-01 02:48:44
+LastSessions<|||>1<|||>Unnamed
+LastActiveSession<|||>1<|||>Unnamed
+ColWidths_connform.ListSessions<|||>1<|||>163,50,50,50,50,50,53
+ColsVisible_connform.ListSessions<|||>1<|||>0
+ColPositions_connform.ListSessions<|||>1<|||>0,1,2,3,4,5,6
+ColSort_connform.ListSessions<|||>1<|||>0,0
+ColWidths_frmTableEditor.listColumns<|||>1<|||>38,193,156,90,60,65,50,251,130,140,100,100
+ColsVisible_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
+ColPositions_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
+ColSort_frmTableEditor.listColumns<|||>1<|||>-1,0
+ColWidths_frmTableEditor.treeIndexes<|||>1<|||>338,100,80
+ColsVisible_frmTableEditor.treeIndexes<|||>1<|||>0,1,2
+ColPositions_frmTableEditor.treeIndexes<|||>1<|||>0,1,2
+ColSort_frmTableEditor.treeIndexes<|||>1<|||>-1,0
+ColWidths_frmTableEditor.listForeignKeys<|||>1<|||>10,177,100,240,80,80
+ColsVisible_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColPositions_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColSort_frmTableEditor.listForeignKeys<|||>1<|||>-1,0
+CoolBand0Index<|||>3<|||>0
+CoolBand0Break<|||>3<|||>1
+CoolBand0Width<|||>3<|||>1360
+CoolBand1Index<|||>3<|||>1
+CoolBand1Break<|||>3<|||>1
+CoolBand1Width<|||>3<|||>1360
+MainWinOnMonitor<|||>3<|||>0
+ColWidths_MainForm.ListDatabases<|||>1<|||>150,80,50,50,50,50,50,50,50,50,120
+ColsVisible_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColPositions_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColSort_MainForm.ListDatabases<|||>1<|||>0,0
+ColWidths_MainForm.ListVariables<|||>1<|||>160,200,275
+ColsVisible_MainForm.ListVariables<|||>1<|||>0,1,2
+ColPositions_MainForm.ListVariables<|||>1<|||>0,1,2
+ColSort_MainForm.ListVariables<|||>1<|||>0,0
+ColWidths_MainForm.ListStatus<|||>1<|||>160,275,100,100
+ColsVisible_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColPositions_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColSort_MainForm.ListStatus<|||>1<|||>0,0
+ColWidths_MainForm.ListProcesses<|||>1<|||>70,80,80,80,80,50,50,154
+ColsVisible_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColPositions_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColSort_MainForm.ListProcesses<|||>1<|||>0,1
+ColWidths_MainForm.ListCommandStats<|||>1<|||>120,100,100,100,215
+ColsVisible_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColPositions_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColSort_MainForm.ListCommandStats<|||>1<|||>1,1
+ColWidths_MainForm.ListTables<|||>1<|||>120,70,70,120,120,70,100,50,70,70,70,70,70,90,120,70,70,70,50
+ColsVisible_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,18
+ColPositions_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+ColSort_MainForm.ListTables<|||>1<|||>0,0
+MainWinMaximized<|||>3<|||>1
+ColWidths_frmInsertFiles.ListColumns<|||>1<|||>100,80,295
+ColsVisible_frmInsertFiles.ListColumns<|||>1<|||>0,1,2
+ColPositions_frmInsertFiles.ListColumns<|||>1<|||>0,1,2
+ColSort_frmInsertFiles.ListColumns<|||>1<|||>-1,0
+ColWidths_frmInsertFiles.ListFiles<|||>1<|||>325,70,80
+ColsVisible_frmInsertFiles.ListFiles<|||>1<|||>0,1,2
+ColPositions_frmInsertFiles.ListFiles<|||>1<|||>0,1,2
+ColSort_frmInsertFiles.ListFiles<|||>1<|||>0,0
+MemoEditorWidth<|||>3<|||>140
+DateTimeEditor_CursorPos_Type4<|||>3<|||>14
+querymemoheight<|||>3<|||>296
+sqloutheight<|||>3<|||>85
+Servers\Unnamed\SessionCreated<|||>1<|||>2017-12-01 02:48:47
+Servers\Unnamed\Host<|||>1<|||>127.0.0.1
+Servers\Unnamed\WindowsAuth<|||>3<|||>0
+Servers\Unnamed\User<|||>1<|||>root
+Servers\Unnamed\Password<|||>1<|||>7
+Servers\Unnamed\LoginPrompt<|||>3<|||>0
+Servers\Unnamed\Port<|||>1<|||>3306
+Servers\Unnamed\NetType<|||>3<|||>0
+Servers\Unnamed\Compressed<|||>3<|||>0
+Servers\Unnamed\LocalTimeZone<|||>3<|||>0
+Servers\Unnamed\QueryTimeout<|||>3<|||>0
+Servers\Unnamed\KeepAlive<|||>3<|||>0
+Servers\Unnamed\FullTableStatus<|||>3<|||>1
+Servers\Unnamed\Databases<|||>1<|||>
+Servers\Unnamed\Comment<|||>1<|||>
+Servers\Unnamed\StartupScriptFilename<|||>1<|||>
+Servers\Unnamed\SSHtunnelHost<|||>1<|||>
+Servers\Unnamed\SSHtunnelHostPort<|||>3<|||>0
+Servers\Unnamed\SSHtunnelUser<|||>1<|||>
+Servers\Unnamed\SSHtunnelPassword<|||>1<|||>3
+Servers\Unnamed\SSHtunnelTimeout<|||>3<|||>4
+Servers\Unnamed\SSHtunnelPrivateKey<|||>1<|||>
+Servers\Unnamed\SSHtunnelPort<|||>3<|||>3307
+Servers\Unnamed\SSL_Active<|||>3<|||>0
+Servers\Unnamed\SSL_Key<|||>1<|||>
+Servers\Unnamed\SSL_Cert<|||>1<|||>
+Servers\Unnamed\SSL_CA<|||>1<|||>
+Servers\Unnamed\SSL_Cipher<|||>1<|||>
+Servers\Unnamed\ServerVersionFull<|||>1<|||>10.1.28-MariaDB - mariadb.org binary distribution
+Servers\Unnamed\ConnectCount<|||>3<|||>9
+Servers\Unnamed\ServerVersion<|||>3<|||>100128
+Servers\Unnamed\LastConnect<|||>1<|||>2017-12-09 11:58:27
+Servers\Unnamed\lastUsedDB<|||>1<|||>agencias_de_viajes
+Servers\Unnamed\RefusedCount<|||>3<|||>1
+Servers\Unnamed\agencias_de_viajes|destino\Sort<|||>1<|||>1_DESCRIPCION|
+Servers\Unnamed\agencias_de_viajes|pais\Sort<|||>1<|||>1_CVE_CONTINENTE|0_CVE_PAIS|
+Servers\Unnamed\agencias_de_viajes|paquete_destino\Sort<|||>1<|||>0_cve_ciudad|
+Servers\Unnamed\agencias_de_viajes|usuario\Sort<|||>1<|||>1_CVE_USUARIO|
+Servers\Unnamed\agencias_de_viajes|venta\Sort<|||>1<|||>1_CVE_VENTA|
+Servers\Unnamed\agencias_de_viajes|vuelo\Sort<|||>1<|||>0_CVE_PAQUETE|
+Servers\Unnamed\QueryHistory\1<|||>1<|||>2017-12-04 00:20:06|agencias_de_viajes|0|select * from paquete
+Servers\Unnamed\QueryHistory\2<|||>1<|||>2017-12-04 00:20:53|agencias_de_viajes|78|INSERT INTO PAQUETE(NOMBRE, COSTO, DESCRIPCION) VALUES ('TURISTA', '10000', 'NADA')
+Servers\Unnamed\QueryHistory\3<|||>1<|||>2017-12-04 00:21:20|agencias_de_viajes|0|SELECT * FROM PAQUETE <{{{><}}}><{{{><}}}>
+Servers\Unnamed\QueryHistory\4<|||>1<|||>2017-12-08 01:04:22|agencias_de_viajes|0|SELECT * <{{{><}}}>FROM VENTA
+Servers\Unnamed\QueryHistory\5<|||>1<|||>2017-12-08 01:06:37|agencias_de_viajes|0|SELECT * <{{{><}}}>FROM VENTA AS V, <{{{><}}}>	  PAQUETE_DESTINO AS PD,<{{{><}}}>	  PAQUETE AS P, <{{{><}}}>	  PERSONAS AS PR <{{{><}}}>WHERE V.CVE_CLIENTE = PR.CVE_PERSONA
+Servers\Unnamed\QueryHistory\6<|||>1<|||>2017-12-08 01:07:24|agencias_de_viajes|0|SELECT * <{{{><}}}>FROM VENTA AS V, <{{{><}}}>	  PAQUETE_DESTINO AS PD,<{{{><}}}>	  PAQUETE AS P, <{{{><}}}>	  PERSONAS AS PR <{{{><}}}>WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND <{{{><}}}>		PD.CVE_PAQUETE = P.CVE_PAQUETE
+Servers\Unnamed\QueryHistory\8<|||>1<|||>2017-12-08 01:08:48|agencias_de_viajes|0|SELECT * <{{{><}}}>FROM VENTA AS V, <{{{><}}}>	  PAQUETE_DESTINO AS PD,<{{{><}}}>	  PAQUETE AS P, <{{{><}}}>	  CIUDAD AS C,<{{{><}}}>	  PERSONAS AS PR <{{{><}}}>WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND <{{{><}}}>		PD.CVE_PAQUETE = P.CVE_PAQUETE AND <{{{><}}}>		PD.CVE_CIUDAD =  C.CVE_CIUDAD
+Servers\Unnamed\QueryHistory\7<|||>1<|||>2017-12-08 01:10:25|agencias_de_viajes|0|SELECT CVE_VENTA,  P.DESCRIPCION, PR.NOMBRE, PR.PATERNO, PR.MATERNO<{{{><}}}>FROM VENTA AS V, <{{{><}}}>	  PAQUETE_DESTINO AS PD,<{{{><}}}>	  PAQUETE AS P, <{{{><}}}>	  CIUDAD AS C,<{{{><}}}>	  PERSONAS AS PR <{{{><}}}>WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND <{{{><}}}>		PD.CVE_PAQUETE = P.CVE_PAQUETE AND <{{{><}}}>		PD.CVE_CIUDAD =  C.CVE_CIUDAD
+Servers\Unnamed\QueryHistory\9<|||>1<|||>2017-12-08 01:10:43|agencias_de_viajes|0|SELECT CVE_VENTA,  P.DESCRIPCION, PR.NOMBRE, PR.PATERNO, PR.MATERNO, COSTO<{{{><}}}>FROM VENTA AS V, <{{{><}}}>	  PAQUETE_DESTINO AS PD,<{{{><}}}>	  PAQUETE AS P, <{{{><}}}>	  CIUDAD AS C,<{{{><}}}>	  PERSONAS AS PR <{{{><}}}>WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND <{{{><}}}>		PD.CVE_PAQUETE = P.CVE_PAQUETE AND <{{{><}}}>		PD.CVE_CIUDAD =  C.CVE_CIUDAD
+Servers\Unnamed\QueryHistory\10<|||>1<|||>2017-12-08 01:10:58|agencias_de_viajes|0|SELECT CVE_VENTA,  P.DESCRIPCION AS TIPO_PAQUETE, PR.NOMBRE, PR.PATERNO, PR.MATERNO, COSTO<{{{><}}}>FROM VENTA AS V, <{{{><}}}>	  PAQUETE_DESTINO AS PD,<{{{><}}}>	  PAQUETE AS P, <{{{><}}}>	  CIUDAD AS C,<{{{><}}}>	  PERSONAS AS PR <{{{><}}}>WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND <{{{><}}}>		PD.CVE_PAQUETE = P.CVE_PAQUETE AND <{{{><}}}>		PD.CVE_CIUDAD =  C.CVE_CIUDAD
+Servers\Unnamed\QueryHistory\11<|||>1<|||>2017-12-08 01:31:47|agencias_de_viajes|0|-- SELECT CVE_VENTA,  P.DESCRIPCION AS TIPO_PAQUETE, PR.NOMBRE, PR.PATERNO, PR.MATERNO, COSTO<{{{><}}}>-- FROM VENTA AS V,<{{{><}}}>-- PAQUETE_DESTINO AS PD,<{{{><}}}>-- PAQUETE AS P,<{{{><}}}>-- CIUDAD AS C,<{{{><}}}>-- PERSONAS AS PR<{{{><}}}>-- WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND<{{{><}}}>-- PD.CVE_PAQUETE = P.CVE_PAQUETE AND<{{{><}}}>-- PD.CVE_CIUDAD =  C.CVE_CIUDAD<{{{><}}}>-- 		<{{{><}}}>		<{{{><}}}>		<{{{><}}}>		SELECT * FROM continente WHERE TRUE=TRUE
+Servers\Unnamed\QueryHistory\12<|||>1<|||>2017-12-08 01:32:27|agencias_de_viajes|16|-- SELECT CVE_VENTA,  P.DESCRIPCION AS TIPO_PAQUETE, PR.NOMBRE, PR.PATERNO, PR.MATERNO, COSTO<{{{><}}}>-- FROM VENTA AS V,<{{{><}}}>-- PAQUETE_DESTINO AS PD,<{{{><}}}>-- PAQUETE AS P,<{{{><}}}>-- CIUDAD AS C,<{{{><}}}>-- PERSONAS AS PR<{{{><}}}>-- WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND<{{{><}}}>-- PD.CVE_PAQUETE = P.CVE_PAQUETE AND<{{{><}}}>-- PD.CVE_CIUDAD =  C.CVE_CIUDAD<{{{><}}}>-- 		<{{{><}}}>		<{{{><}}}>		<{{{><}}}>	SELECT * FROM continente WHERE NOMBRE='1d'
+Servers\Unnamed\QueryHistory\13<|||>1<|||>2017-12-08 01:32:34|agencias_de_viajes|16|-- SELECT CVE_VENTA,  P.DESCRIPCION AS TIPO_PAQUETE, PR.NOMBRE, PR.PATERNO, PR.MATERNO, COSTO<{{{><}}}>-- FROM VENTA AS V,<{{{><}}}>-- PAQUETE_DESTINO AS PD,<{{{><}}}>-- PAQUETE AS P,<{{{><}}}>-- CIUDAD AS C,<{{{><}}}>-- PERSONAS AS PR<{{{><}}}>-- WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND<{{{><}}}>-- PD.CVE_PAQUETE = P.CVE_PAQUETE AND<{{{><}}}>-- PD.CVE_CIUDAD =  C.CVE_CIUDAD<{{{><}}}>-- 		<{{{><}}}>		<{{{><}}}>		<{{{><}}}>	SELECT * FROM continente WHERE NOMBRE='ASIA'
+Servers\Unnamed\QueryHistory\14<|||>1<|||>2017-12-08 01:43:59|agencias_de_viajes|15|-- SELECT CVE_VENTA,  P.DESCRIPCION AS TIPO_PAQUETE, PR.NOMBRE, PR.PATERNO, PR.MATERNO, COSTO<{{{><}}}>-- FROM VENTA AS V,<{{{><}}}>-- PAQUETE_DESTINO AS PD,<{{{><}}}>-- PAQUETE AS P,<{{{><}}}>-- CIUDAD AS C,<{{{><}}}>-- PERSONAS AS PR<{{{><}}}>-- WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND<{{{><}}}>-- PD.CVE_PAQUETE = P.CVE_PAQUETE AND<{{{><}}}>-- PD.CVE_CIUDAD =  C.CVE_CIUDAD<{{{><}}}>-- 		<{{{><}}}>		<{{{><}}}>		<{{{><}}}>SELECT * FROM personas WHERE cve_persona='1'
+Servers\Unnamed\QueryHistory\15<|||>1<|||>2017-12-08 01:45:06|agencias_de_viajes|0|-- SELECT CVE_VENTA,  P.DESCRIPCION AS TIPO_PAQUETE, PR.NOMBRE, PR.PATERNO, PR.MATERNO, COSTO<{{{><}}}>-- FROM VENTA AS V,<{{{><}}}>-- PAQUETE_DESTINO AS PD,<{{{><}}}>-- PAQUETE AS P,<{{{><}}}>-- CIUDAD AS C,<{{{><}}}>-- PERSONAS AS PR<{{{><}}}>-- WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND<{{{><}}}>-- PD.CVE_PAQUETE = P.CVE_PAQUETE AND<{{{><}}}>-- PD.CVE_CIUDAD =  C.CVE_CIUDAD<{{{><}}}>-- 		<{{{><}}}>		<{{{><}}}>		<{{{><}}}>SELECT * FROM personas WHERE cve_persona='1' AND cve_persona='2'
+Servers\Unnamed\QueryHistory\16<|||>1<|||>2017-12-08 01:45:12|agencias_de_viajes|15|-- SELECT CVE_VENTA,  P.DESCRIPCION AS TIPO_PAQUETE, PR.NOMBRE, PR.PATERNO, PR.MATERNO, COSTO<{{{><}}}>-- FROM VENTA AS V,<{{{><}}}>-- PAQUETE_DESTINO AS PD,<{{{><}}}>-- PAQUETE AS P,<{{{><}}}>-- CIUDAD AS C,<{{{><}}}>-- PERSONAS AS PR<{{{><}}}>-- WHERE V.CVE_CLIENTE = PR.CVE_PERSONA AND<{{{><}}}>-- PD.CVE_PAQUETE = P.CVE_PAQUETE AND<{{{><}}}>-- PD.CVE_CIUDAD =  C.CVE_CIUDAD<{{{><}}}>-- 		<{{{><}}}>		<{{{><}}}>		<{{{><}}}>SELECT * FROM personas WHERE cve_persona='1' or cve_persona='2'
+Servers\Unnamed\QueryHistory\17<|||>1<|||>2017-12-08 19:55:06|agencias_de_viajes|47|INSERT INTO `agencias_de_viajes`.`personas` (`CVE_PERSONA`, `NOMBRE`, `PATERNO`, `MATERNO`, `TELEFONO`,`E-mail`) VALUES ('6', 'rafael', 'hernandez', 'alvarez', '93224455','sdads@hotmail.com');<{{{><}}}>
+Servers\Unnamed\QueryHistory\18<|||>1<|||>2017-12-09 14:41:53|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`venta`
+Servers\Unnamed\QueryHistory\19<|||>1<|||>2017-12-09 14:43:36|agencias_de_viajes|329|SELECT * FROM `agencias_de_viajes`.`venta`,`vuelo`
+Servers\Unnamed\QueryHistory\20<|||>1<|||>2017-12-09 14:45:15|agencias_de_viajes|32|SELECT * FROM `agencias_de_viajes`.`venta`,`vuelo` WHERE `CVE_VENTA`
+Servers\Unnamed\QueryHistory\21<|||>1<|||>2017-12-09 14:50:54|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`venta`=`cve_venta` 
+Servers\Unnamed\QueryHistory\22<|||>1<|||>2017-12-09 14:51:45|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`venta` WHERE `CVE_VENTA` 
+Servers\Unnamed\QueryHistory\23<|||>1<|||>2017-12-09 14:51:57|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`venta` WHERE `venta`.`CVE_VENTA` 
+Servers\Unnamed\QueryHistory\24<|||>1<|||>2017-12-09 14:52:08|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`venta` WHERE `venta`.CVE_VENTA
+Servers\Unnamed\QueryHistory\25<|||>1<|||>2017-12-09 14:52:14|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`venta` WHERE `venta`.CVE_VENTA;
+Servers\Unnamed\QueryHistory\26<|||>1<|||>2017-12-09 14:54:24|agencias_de_viajes|0|SELECT `CVE_VENTA` FROM `venta`
+Servers\Unnamed\QueryHistory\27<|||>1<|||>2017-12-09 14:56:59|agencias_de_viajes|16|SELECT `CVE_VENTA`, `CVE_VUELO` FROM `venta`
+Servers\Unnamed\QueryHistory\28<|||>1<|||>2017-12-09 14:57:32|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO` FROM `venta`
+Servers\Unnamed\QueryHistory\29<|||>1<|||>2017-12-09 14:58:59|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO`,`NOMBRE` FROM `venta`,`paquete`
+Servers\Unnamed\QueryHistory\30<|||>1<|||>2017-12-09 15:00:40|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO`,`cve_paquete`,`NOMBRE` FROM `venta`,`paquete`
+Servers\Unnamed\QueryHistory\31<|||>1<|||>2017-12-09 15:10:57|agencias_de_viajes|16|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO`,`cve_paquete`,`NOMBRE`,`CVE_CLIENTE` FROM `venta`,`paquete`
+Servers\Unnamed\QueryHistory\32<|||>1<|||>2017-12-09 15:12:44|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO`,`cve_paquete`,`NOMBRE1`,`CVE_CLIENTE` FROM `venta`,`paquete`
+Servers\Unnamed\QueryHistory\33<|||>1<|||>2017-12-09 15:13:06|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO`,`cve_paquete`,`NOMBRE1`,`CVE_CLIENTE`,`NOMBRE` FROM `venta`,`paquete`,`personas`
+Servers\Unnamed\QueryHistory\34<|||>1<|||>2017-12-09 15:16:35|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO`,`cve_paquete`,`NOMBRE1`,`CVE_CLIENTE`,`NOMBRE`, `NO_BOLETOS`,`SUBTOTAL`,`EFECTIVO`,`TOTAL` FROM `venta`,`paquete`,`personas`
+Servers\Unnamed\QueryHistory\35<|||>1<|||>2017-12-09 15:17:48|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO`,`cve_paquete`,`NOMBRE1`,`CVE_CLIENTE`, `NO_BOLETOS`,`SUBTOTAL`,`EFECTIVO`,`TOTAL` FROM `venta`,`paquete`,`personas`
+Servers\Unnamed\QueryHistory\36<|||>1<|||>2017-12-09 15:18:08|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE_DESTINO`,`NOMBRE1`,`CVE_CLIENTE`, `NO_BOLETOS`,`SUBTOTAL`,`EFECTIVO`,`TOTAL` FROM `venta`,`paquete`,`personas`
+Servers\Unnamed\QueryHistory\38<|||>1<|||>2017-12-09 15:20:52|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`vuelo`<{{{><}}}>
+Servers\Unnamed\QueryHistory\39<|||>1<|||>2017-12-09 15:21:26|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`venta`<{{{><}}}>
+Servers\Unnamed\QueryHistory\40<|||>1<|||>2017-12-09 15:22:46|agencias_de_viajes|0|SELECT * FROM `agencias_de_viajes`.`venta`, `agencias_de_viajes`.`personas`<{{{><}}}>
+Servers\Unnamed\QueryHistory\41<|||>1<|||>2017-12-09 16:21:38|agencias_de_viajes|0|SELECT `CVE_VENTA`, `CVE_VUELO`,`CVE_PAQUETE`,`NOMBRE1`,`CVE_CLIENTE`, `NO_BOLETOS`,`SUBTOTAL`,`EFECTIVO`,`TOTAL` FROM `venta`,`paquete`,`personas`
+Servers\Unnamed\QueryHistory\37<|||>1<|||>2017-12-09 16:27:45|agencias_de_viajes|0|SELECT `cve_paquete_destino`, `NOMBRE1`, `NOMBRE` FROM `paquete`,`ciudad`,`paquete_destino`
+Servers\Unnamed\QueryHistory\42<|||>1<|||>2017-12-09 16:28:46|agencias_de_viajes|0|SELECT `cve_paquete_destino`, `cve_paquete`, `cve_ciudad` FROM `paquete_destino`
+Servers\Unnamed\QueryHistory\43<|||>1<|||>2017-12-09 16:31:10|agencias_de_viajes|0|SELECT `cve_paquete_destino`, `cve_paquete`, `cve_ciudad`  FROM `paquete_destino`
+Servers\Unnamed\QueryHistory\44<|||>1<|||>2017-12-09 17:11:27|agencias_de_viajes|0|<{{{><}}}>SELECT `cve_paquete`, `NOMBRE1`, `cve_ciudad`, `NOMBRE` FROM `paquete`, `ciudad`
+Servers\Unnamed\QueryHistory\45<|||>1<|||>2017-12-09 18:42:09|agencias_de_viajes|0|<{{{><}}}>SELECT `cve_paquete`, `NOMBRE1`,`DESCRIPCION`, `cve_ciudad`,CVE_PAIS, `NOMBRE` FROM `paquete`, `ciudad`
+Servers\Unnamed\QueryHistory\46<|||>1<|||>2017-12-09 18:42:28|agencias_de_viajes|0|<{{{><}}}>SELECT `cve_paquete`, `NOMBRE1`,`DESCRIPCION`, `cve_ciudad`, `NOMBRE`, CVE_PAIS FROM `paquete`, `ciudad`
+Servers\Unnamed\QueryHistory\48<|||>1<|||>2017-12-09 18:55:25|agencias_de_viajes|0|SELECT cve_paquete_destino, cve_paquete, cve_ciudad from  `paquete_destino`
+Servers\Unnamed\QueryHistory\47<|||>1<|||>2017-12-09 18:55:43|agencias_de_viajes|0|SELECT cve_paquete_destino, cve_paquete, cve_ciudad, costo from  `paquete_destino`
+Servers\Unnamed\QueryHistory\49<|||>1<|||>2017-12-09 18:57:33|agencias_de_viajes|0|SELECT  cve_paquete, NOMBRE1, cve_ciudad, NOMBRE from  `paquete`, `ciudad`
+Servers\Unnamed\QueryHistory\50<|||>1<|||>2017-12-09 19:00:29|agencias_de_viajes|0|SELECT  cve_paquete, NOMBRE1, DESCRIPCION, cve_ciudad, NOMBRE from  `paquete`, `ciudad`

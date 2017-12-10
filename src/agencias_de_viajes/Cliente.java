@@ -171,8 +171,18 @@ public class Cliente extends javax.swing.JFrame {
         });
 
         jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Eliminar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Menu");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -333,6 +343,52 @@ public class Cliente extends javax.swing.JFrame {
        Llenar();
         Limpiar();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        try{
+        int datos=jTable1.getSelectedRow();
+         String sql="delete from `personas` where `CVE_PERSONA` = "+jTable1.getValueAt(datos, 0);
+         sent=conn.createStatement();
+          int n = sent.executeUpdate(sql);
+          if(n>0){
+              Llenar();
+              
+          }JOptionPane.showMessageDialog(null, "Datos eliminados");
+          
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            String sql = "UPDATE `agencias_de_viajes`.`personas` SET  NOMBRE = ?, PATERNO = ?, MATERNO = ?, TELEFONO = ?, E-mail = ?   WHERE  Id_Viajes = ?";
+            int datos = jTable1.getSelectedRow();
+            String dao =  (String)jTable1.getValueAt(datos, 0);
+            PreparedStatement ps = conn.prepareStatement(sql);
+             ps.setString(1, nom1.getText());
+            ps.setString(2, apa1.getText());
+            ps.setString(3, ama1.getText());
+            ps.setString(4, tel1.getText());
+            ps.setString(5, mai1.getText());
+            
+//ps.setString(1, paq1.getText());
+            ps.setString(1, dao);
+           // System.out.println(sql);
+            int n = ps.executeUpdate();
+            if(n>0){
+                Limpiar();
+                Llenar();
+                JOptionPane.showMessageDialog(null, "Datos Modificados");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+           // Logger.getLogger(Viajes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

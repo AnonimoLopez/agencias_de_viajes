@@ -120,16 +120,18 @@ public class Consultas_sql_1 {
         Consultas_sql_1 x = new Consultas_sql_1();
         String name_table = "personas";
         String busqueda[][] = new String[1][2];
+       //busqueda[0][0] = "cve_persona";
+       //busqueda[0][1] = "1";
         busqueda[0][0] = "cve_persona";
-        busqueda[0][1] = "1";
-//        busqueda[1][0] = "cve_persona";
-//        busqueda[1][1] = "2";
-//        busqueda[1][0] = "MATERNO";
-//        busqueda[1][1] = "MENDEZ";
+        busqueda[0][1] = "2";
+        //busqueda[1][0] = "MATERNO";
+        //busqueda[1][1] = "MENDEZ";
+
         ResultSet rs = x.search(name_table, null);
         if (rs != null) {
             while (rs.next()) {
                 System.out.println(rs.getString(1) + "-----" + rs.getString(2) + "------" + rs.getString(4));
+                //System.out.println(x);
             }
         }
 
