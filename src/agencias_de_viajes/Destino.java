@@ -82,8 +82,8 @@ public class Destino extends javax.swing.JFrame {
         agregar_pais = new javax.swing.JButton();
         agregar_ciudad = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -132,6 +132,11 @@ public class Destino extends javax.swing.JFrame {
         });
 
         agregar_pais.setText("GUARDAR");
+        agregar_pais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar_paisActionPerformed(evt);
+            }
+        });
 
         agregar_ciudad.setText("GUARDAR");
         agregar_ciudad.addActionListener(new java.awt.event.ActionListener() {
@@ -141,13 +146,23 @@ public class Destino extends javax.swing.JFrame {
         });
 
         jButton1.setText("NUEVO");
-
-        jButton2.setText("NUEVO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("NUEVO");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("NUEVO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -179,10 +194,10 @@ public class Destino extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(agregar_pais, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                                     .addComponent(txt_pais)
-                                    .addComponent(txt_Cve_pais))))
+                                    .addComponent(txt_Cve_pais)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_ciudad)
@@ -218,8 +233,8 @@ public class Destino extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(agregar_cotinente)
@@ -321,6 +336,7 @@ public class Destino extends javax.swing.JFrame {
                     txt_pais.setText(valor[1]);
                     
                    cargar_ciudad();
+                  
                 }
                  
             }
@@ -421,7 +437,7 @@ public class Destino extends javax.swing.JFrame {
         valores[1][0] = "cve_ciudad";
         valores[1][1] = txt_cve_ciudad.getText();    
         x.update("ciudad", valores);
-        cargar_ciudad();
+        //cargar_ciudad();
         }
         
         Llenar();
@@ -443,6 +459,49 @@ public class Destino extends javax.swing.JFrame {
                     txt_cve_ciudad.setText(valor[0]);
                     txt_ciudad.setText(valor[1]);   // TODO add your handling code here:
     }//GEN-LAST:event_cbx_ciudadItemStateChanged
+
+    private void agregar_paisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_paisActionPerformed
+        // TODO add your handling code here:
+         if (txt_pais.getText().equals("")){
+               JOptionPane.showMessageDialog(this, "POR FAVOR INGRESE UNA CIUDAD");
+         
+                
+             }else{
+                   Consultas_sql_1 x = new Consultas_sql_1();
+        if (txt_Cve_pais.getText().equals("")){
+            System.out.println(".........c.......");
+        String valor[] = (cbx_continente.getSelectedItem().toString()).split("-");
+        String valores[][] = new String[2][2];
+        valores[0][0] = "NOMBRE";valores[0][1] = txt_pais.getText();
+        valores[1][0] = "cve_continente";valores[1][1] = valor[0]; 
+        x.insert("pais", valores);   // TODO add your handling code here:
+        cargar_ciudad();
+            
+        }else{
+              String valores[][] = new String[2][2];
+        valores[0][0] = "NOMBRE";
+        valores[0][1] = txt_pais.getText();
+        valores[1][0] = "cve_pais";
+        valores[1][1] = txt_Cve_pais.getText();    
+        x.update("pais", valores);
+        cargar_ciudad();
+        }
+        
+        Llenar();
+             }
+    }//GEN-LAST:event_agregar_paisActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        txt_continente.setText("");
+        txtCve_Continente.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        txt_pais.setText("");
+        txt_Cve_pais.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
  void Llenar() {
 
         try {
