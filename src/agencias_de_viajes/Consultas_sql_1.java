@@ -37,7 +37,7 @@ public class Consultas_sql_1 {
     public int search_usuario(String Usuario, String Password) throws SQLException {
         int id = 0;
         s = conn.createStatement();
-        String query = "SELECT ID FROM USUARIOS WHERE USUARIO = '" + Usuario + "' AND PASSWORD = '" + Password + "'";
+        String query = "SELECT CVE_USUARIO FROM USUARIO WHERE USUARIO = '" + Usuario + "' AND PASSWORD = '" + Password + "'";
         rs = s.executeQuery(query);
 
         while (rs.next()) {
@@ -66,7 +66,7 @@ public class Consultas_sql_1 {
         int id = 0;
         try {
             s = conn.createStatement();
-            String query = "SELECT ID FROM USUARIOS WHERE USUARIO = '" + Usuario + "'";
+            String query = "SELECT cve_usuario FROM USUARIO WHERE USUARIO = '" + Usuario + "'";
             rs = s.executeQuery(query);
 
             while (rs.next()) {
@@ -81,59 +81,120 @@ public class Consultas_sql_1 {
     public ResultSet search(String name_table, String busqueda[][]) throws SQLException {
         String query = "SELECT * FROM " + name_table + " WHERE ";
         int id = 0;
-
         st = conn.createStatement();
-
         if (busqueda != null) {
             for (int i = 0; i < busqueda.length; i++) {
                 String temp_b = "";
                 String temp;
-//                try {
-//                    Integer.parseInt(busqueda[i][1]);
-//                    temp = busqueda[i][1];
-//                } catch (NumberFormatException ex) {
-//                    temp = "'" + busqueda[i][1] + "'";
                 temp = "'" + busqueda[i][1] + "'";
                 temp_b = busqueda[i][0] + "=" + temp;
-
                 if (i < busqueda.length - 1) {
                     temp_b += " AND ";
                 }
-
                 query += temp_b;
-//                }
             }
-
         } else {
             query += "TRUE=TRUE";
         }
-
-        //  if ()
-        //query += "TRUE = TRUE";
-        System.out.println(query);
         rs = st.executeQuery(query);
-
         return rs;
+    }
+
+    public void insert(String name_table, String valores[][]) {
+        String sql = "INSERT INTO " + name_table;
+        String sql_colum = "(";
+        String sql_values = "VALUES (";
+        String temp_colum = "";
+        String temp_values = "";
+        for (int i = 0; i < valores.length; i++) {
+            temp_colum += valores[i][0];
+            temp_values += "'" + valores[i][1] + "'";
+            if (i < valores.length - 1) {
+                temp_colum += ",";
+                temp_values += ",";
+            }
+        }
+        sql_colum += temp_colum + ")";
+        sql_values += temp_values + ")";
+        sql += sql_colum + sql_values;
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Consultas_sql_1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(sql);
+    }
+
+    public void update(String name_table, String valores[][]) {
+        String sql = "UPDATE " + name_table + " SET ";
+        String colum = "";
+
+        for (int i = 0; i < valores.length; i++) {
+
+            if (i < valores.length - 1) {
+                colum += valores[i][0] + "=" + "'" + valores[i][1] + "'";
+                if (i < valores.length - 2) {
+                    colum += ",";
+                }
+            } else {
+                colum += " WHERE " + valores[i][0] + "=" + "'" + valores[i][1] + "'";
+            }
+        }
+
+        sql += colum;
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Consultas_sql_1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(sql);
+
     }
 
     public static void main(String[] args) throws SQLException {
         Consultas_sql_1 x = new Consultas_sql_1();
-        String name_table = "personas";
-        String busqueda[][] = new String[1][2];
-       //busqueda[0][0] = "cve_persona";
-       //busqueda[0][1] = "1";
-        busqueda[0][0] = "cve_persona";
-        busqueda[0][1] = "2";
-        //busqueda[1][0] = "MATERNO";
-        //busqueda[1][1] = "MENDEZ";
+//EJEMPLO PARA BUSCAR
+//        String name_table = "personas";
+//        String busqueda[][] = new String[1][2];
+//        busqueda[0][0] = "cve_persona";
+//        busqueda[0][1] = "1";
+//        busqueda[0][0] = "cve_persona";
+//        busqueda[0][1] = "2";
+//        busqueda[1][0] = "MATERNO";
+//        busqueda[1][1] = "MENDEZ";
+//
+//        ResultSet rs = x.search(name_table, null);
+//        if (rs != null) {
+//            while (rs.next()) {
+//                System.out.println(rs.getString(1) + "-----" + rs.getString(2) + "------" + rs.getString(4));
+//                System.out.println(x);
+//            }
+//        }
+        //EJEMPLO PARA INSERTAR
+//        String valores[][] = new String[4][2];
+//        valores[0][0] = "NOMBRE";valores[0][1] = "JOSE DEL CARMEN";
+//        valores[1][0] = "PATERNO";valores[1][1] = "LOPEZ";
+//        valores[2][0] = "MATERNO";valores[2][1] = "MARTINES";
+//        valores[3][0] = "TELEFONO";valores[3][1] = "9932004038";
+//        
+//        x.insert("personas", valores);
 
-        ResultSet rs = x.search(name_table, null);
-        if (rs != null) {
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + "-----" + rs.getString(2) + "------" + rs.getString(4));
-                //System.out.println(x);
-            }
-        }
+        String valores[][] = new String[5][2];
+        valores[0][0] = "NOMBRE";
+        valores[0][1] = "JOSE1";
+        valores[1][0] = "PATERNO";
+        valores[1][1] = "LOPEZ";
+        valores[2][0] = "MATERNO";
+        valores[2][1] = "MARTINES";
+        valores[3][0] = "TELEFONO";
+        valores[3][1] = "9932004038";
+        valores[4][0] = "CVE_PERSONA";
+        valores[4][1] = "1";
+        x.update("personas", valores);
 
     }
 }

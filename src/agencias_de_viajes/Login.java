@@ -6,6 +6,7 @@
 package agencias_de_viajes;
 
 import java.awt.Image;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    User user_data = new User();
     public Login() {
         initComponents();
     }
@@ -37,12 +39,11 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        usuario = new javax.swing.JTextField();
+        user = new javax.swing.JTextField();
         password = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,13 +61,6 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Registrar");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Empleado", "Sin Cuenta" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,23 +81,17 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addComponent(user, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                         .addComponent(password)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -119,12 +107,8 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
     private boolean validar() {
-        if (usuario.getText().equals("")) {
+        if (user.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "POR FAVOR INGRESE UN USUARIO");
             return false;
         } else if (password.getText().equals("")) {
@@ -138,19 +122,33 @@ public class Login extends javax.swing.JFrame {
         Consultas_sql_1 msql = new Consultas_sql_1();
         try {
             if (validar() == true) {
-                if (msql.search_usuario(usuario.getText(), password.getText()) > 0) {
-                    Menu m = new Menu();
+                Consultas_sql_1 x = new Consultas_sql_1();
+                String name_table = "usuario";
+                String busqueda[][] = new String[2][2];
+                busqueda[0][0] = "USUARIO";
+                busqueda[0][1] = user.getText();
+                busqueda[1][0] = "PASSWORD";
+                busqueda[1][1] = password.getText();
+                ResultSet rs = x.search(name_table, busqueda);
+                 
+                
+                if (rs != null) {
+                    while (rs.next()) {
+                       user_data.setCve_user(rs.getString("cve_usuario"));
+                       user_data.setUser(rs.getString("usuario"));
+                       user_data.setTipo_empleado(rs.getInt("cve_tipo_empleado"));
+                    }
+                    System.out.println( "-" +user_data.getTipo_empleado());
+                    Menu m = new Menu(user_data);
                     m.setVisible(true);
+                   // m.User_data = user_data;
                     dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "USUARIO Y/O CONSTRASEÑA INCORRECTA");
                 }
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -192,11 +190,10 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField password;
-    private javax.swing.JTextField usuario;
+    private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

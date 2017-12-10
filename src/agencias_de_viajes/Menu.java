@@ -5,6 +5,10 @@
  */
 package agencias_de_viajes;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author flavioantonio
@@ -14,8 +18,17 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    public User User_data;
+
     public Menu() {
         initComponents();
+//        System.out.println(User_data.getTipo_empleado());
+    }
+
+    public Menu(User user) {
+        initComponents();
+        User_data = user;
+        System.out.println(User_data.getTipo_empleado());
     }
 
     /**
@@ -30,9 +43,9 @@ public class Menu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        cliente = new javax.swing.JMenuItem();
+        destino = new javax.swing.JMenuItem();
+        paquete = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -56,29 +69,29 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu1.setText("CATALOGOS");
 
-        jMenuItem2.setText("Cliente");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        cliente.setText("Cliente");
+        cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                clienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(cliente);
 
-        jMenuItem8.setText("Destino");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        destino.setText("Destino");
+        destino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                destinoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem8);
+        jMenu1.add(destino);
 
-        jMenuItem9.setText("Paquetes");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        paquete.setText("Paquetes");
+        paquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                paqueteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem9);
+        jMenu1.add(paquete);
 
         jMenuBar1.add(jMenu1);
 
@@ -143,34 +156,46 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void cargar() {
+        if (User_data.getTipo_empleado() == 1) {
+
+        }
+
+    }
+    private void clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteActionPerformed
 
         // TODO add your handling code here:
-        Cliente c=new Cliente();
-        c.setVisible(true);
-        dispose();
+        Cliente c;
+        try {
+            c = new Cliente(User_data);
+            c.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_clienteActionPerformed
+
+    private void destinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinoActionPerformed
         // TODO add your handling code here:
-        Destino d=new Destino();
+        Destino d = new Destino();
 
         d.setVisible(true);
         dispose();
 
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_destinoActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void paqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paqueteActionPerformed
         // TODO add your handling code here:
-        Paquete p =new Paquete();
+        Paquete p = new Paquete();
         p.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_paqueteActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        vuelo v =new vuelo();
+        vuelo v = new vuelo();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -220,18 +245,18 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cliente;
+    private javax.swing.JMenuItem destino;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem paquete;
     // End of variables declaration//GEN-END:variables
 }
