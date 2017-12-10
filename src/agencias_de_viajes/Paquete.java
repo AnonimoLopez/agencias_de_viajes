@@ -56,6 +56,7 @@ public class Paquete extends javax.swing.JFrame {
     }
 
     void Llenar() {
+        Desahabilitar();
 
         try {
 
@@ -261,6 +262,8 @@ public class Paquete extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Limpiar();
+        Habilitar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
