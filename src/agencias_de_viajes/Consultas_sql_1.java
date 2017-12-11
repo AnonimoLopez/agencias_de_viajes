@@ -117,7 +117,7 @@ public class Consultas_sql_1 {
         sql_colum += temp_colum + ")";
         sql_values += temp_values + ")";
         sql += sql_colum + sql_values;
-
+        System.out.println(sql);
         try {
             ps = conn.prepareStatement(sql);
             ps.executeUpdate();

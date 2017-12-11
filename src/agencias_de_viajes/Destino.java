@@ -105,10 +105,13 @@ public class Destino extends javax.swing.JFrame {
         });
 
         txtCve_Continente.setEditable(false);
+        txtCve_Continente.setEnabled(false);
 
         txt_Cve_pais.setEditable(false);
+        txt_Cve_pais.setEnabled(false);
 
         txt_cve_ciudad.setEditable(false);
+        txt_cve_ciudad.setEnabled(false);
 
         cbx_pais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbx_pais.addItemListener(new java.awt.event.ItemListener() {
@@ -269,7 +272,7 @@ public class Destino extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 48, Short.MAX_VALUE))
+                .addGap(0, 266, Short.MAX_VALUE))
         );
 
         pack();
@@ -293,7 +296,7 @@ public class Destino extends javax.swing.JFrame {
             String valor[] = (cbx_continente.getSelectedItem().toString()).split("-");
             txtCve_Continente.setText(valor[0]);
             txt_continente.setText(valor[1]);
-            
+
             cargar_pais();
             System.out.println("----entro aqui");
             Llenar();
@@ -318,7 +321,8 @@ public class Destino extends javax.swing.JFrame {
                     model_combox.addElement(rs.getString(1));
                     stado = false;
                 }
-
+            
+            
                 if (stado) {
                     System.out.println("----entro is null---");
                     model_combox.addElement("");
@@ -339,13 +343,17 @@ public class Destino extends javax.swing.JFrame {
                   
                 }
                  
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    catch (SQLException ex
 
-    void estado_ciudad(Boolean estado) {
+    
+        ) {
+            Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+void estado_ciudad(Boolean estado) {
         cbx_ciudad.enable(estado);
         txt_ciudad.enable(estado);
         txt_cve_ciudad.enable(estado);
@@ -399,7 +407,9 @@ public class Destino extends javax.swing.JFrame {
                 cbx_ciudad.setModel(model_combox);
                 txt_cve_ciudad.setText("");
                 txt_ciudad.setText("");
-            }
+            
+
+}
 
         } catch (SQLException ex) {
             Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
@@ -408,10 +418,42 @@ public class Destino extends javax.swing.JFrame {
     private void cbx_continenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_continenteItemStateChanged
         cargar_pais();
         Llenar();
+          String valor[] = (cbx_continente.getSelectedItem().toString()).split("-");
+          txtCve_Continente.setText(valor[0]);
+         txt_continente.setText(valor[1]);
     }//GEN-LAST:event_cbx_continenteItemStateChanged
 
     private void agregar_cotinenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_cotinenteActionPerformed
         // TODO add your handling code here:
+         String valor[] = (cbx_continente.getSelectedItem().toString()).split("-");
+        if (txt_continente.getText().equals("")){
+               JOptionPane.showMessageDialog(this, "POR FAVOR INGRESE UNA CONTINENTE");
+         
+                
+             }else{
+                   Consultas_sql_1 x = new Consultas_sql_1();
+        if (txtCve_Continente.getText().equals("")){
+            System.out.println(".........c.......");
+       
+        String valores[][] = new String[1][2];
+        valores[0][0] = "NOMBRE";valores[0][1] = txt_continente.getText();
+        //valores[1][0] = "cve_continente";valores[1][1] = valor[0]; 
+        x.insert("continente", valores);   // TODO add your handling code here:
+        cargar_continente();
+            
+        }else{
+              String valores[][] = new String[2][2];
+        valores[0][0] = "NOMBRE";
+        valores[0][1] = txt_continente.getText();
+        valores[1][0] = "CVE_CONTINENTE";
+        valores[1][1] = txtCve_Continente.getText();    
+        x.update("continente", valores);
+       
+       cargar_continente();
+        }
+        
+        Llenar();
+             }
     }//GEN-LAST:event_agregar_cotinenteActionPerformed
 
     private void agregar_ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ciudadActionPerformed
@@ -437,7 +479,7 @@ public class Destino extends javax.swing.JFrame {
         valores[1][0] = "cve_ciudad";
         valores[1][1] = txt_cve_ciudad.getText();    
         x.update("ciudad", valores);
-        //cargar_ciudad();
+        cargar_ciudad();
         }
         
         Llenar();
@@ -446,7 +488,10 @@ public class Destino extends javax.swing.JFrame {
 
     private void cbx_paisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_paisItemStateChanged
         // TODO add your handling code here:
+         String valor[] = (cbx_pais.getSelectedItem().toString()).split("-");
         cargar_ciudad();
+        txt_Cve_pais.setText(valor[0]);
+        txt_pais.setText(valor[1]);
     }//GEN-LAST:event_cbx_paisItemStateChanged
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -475,7 +520,7 @@ public class Destino extends javax.swing.JFrame {
         valores[0][0] = "NOMBRE";valores[0][1] = txt_pais.getText();
         valores[1][0] = "cve_continente";valores[1][1] = valor[0]; 
         x.insert("pais", valores);   // TODO add your handling code here:
-        cargar_ciudad();
+        cargar_pais();
             
         }else{
               String valores[][] = new String[2][2];
@@ -484,7 +529,7 @@ public class Destino extends javax.swing.JFrame {
         valores[1][0] = "cve_pais";
         valores[1][1] = txt_Cve_pais.getText();    
         x.update("pais", valores);
-        cargar_ciudad();
+        cargar_pais();
         }
         
         Llenar();
@@ -517,7 +562,7 @@ public class Destino extends javax.swing.JFrame {
             System.out.println(sql);
             mode1 = new DefaultTableModel(null, titulos){
                         @Override
-			public boolean isCellEditable(int row, int column) {
+        public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
@@ -557,16 +602,28 @@ public class Destino extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Destino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Destino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Destino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Destino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Destino.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Destino.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Destino.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Destino.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
