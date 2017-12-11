@@ -6,21 +6,25 @@
 package agencias_de_viajes;
 //import Agencias_de_viajes.Conectar;
 
+import java.awt.Image;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.text.StyledEditorKit;
 
 /**
  *
  * @author flavioantonio
  */
 public class Cliente extends javax.swing.JFrame {
-
+    
     DefaultTableModel mode1;
     Connection conn;
     Statement sent;
@@ -33,60 +37,69 @@ public class Cliente extends javax.swing.JFrame {
     public Cliente() {
         initComponents();
         conn = Conectar.geConnection();
-        // Llenar_combox();
+        
+        jTable1.setVisible(false);
+        DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
+        model_combox.addElement("3-CLIENTE");
+        tipo_empleado.setModel(model_combox);
+        btnEliminar.setVisible(false);
+      btnMenu.setVisible(false);
 
     }
-
+    
     public Cliente(User user) throws SQLException {
         initComponents();
         conn = Conectar.geConnection();
         user_data = user;
         Llenar_combox();
+        btnExit.setVisible(false);
     }
-
+    
     void Llenar_combox() throws SQLException {
         DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
-
+        
         String sql = "";
         if (user_data.getTipo_empleado() == 1) {
             sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_usuario";
         } else if (user_data.getTipo_empleado() == 2) {
             sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_usuario where cve_tipo_usuario = 3 ";
         } else if (user_data.getTipo_empleado() == 3) {
-            tipo_empleado.setVisible(false);
+               sql = "SELECT CONCAT (CVE_TIPO_EMPLEADO,'-',DESCRIPCION) FROM tipo_usuario where cve_tipo_usuario = 3 ";
+           // tipo_empleado.setVisible(false);
         }
-
+        
+        
         sent = conn.createStatement();
         ResultSet rs = sent.executeQuery(sql);
         while (rs.next()) {
             model_combox.addElement(rs.getString(1));
         }
         tipo_empleado.setModel(model_combox);
-
+        
         Llenar();
     }
-
+    
     void Llenar() {
-
+        
         try {
-
+            
             conn = Conectar.geConnection();
             String valor[] = (tipo_empleado.getSelectedItem().toString()).split("-");
-
+            
             String[] titulos = {"CVE_PERSONA", "NOMBRE", "PATERNO", "MATERNO", "TELEFONO", "EMAIL", "USUARIO", "PASSWORD", "ESTATUS"};
             String sql = "SELECT * FROM personas inner join usuario on CVE_PERSONA = CVE_USUARIO WHERE usuario.CVE_TIPO_USUARIO = " + valor[0];
-
+            
             System.out.println(sql);
-            mode1 = new DefaultTableModel(null, titulos){
-                        @Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-
+            mode1 = new DefaultTableModel(null, titulos) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            
             sent = conn.createStatement();
             ResultSet rs = sent.executeQuery(sql);
-
+            
             String[] fila = new String[9];
             while (rs.next()) {
                 fila[0] = rs.getString("CVE_PERSONA");
@@ -97,7 +110,7 @@ public class Cliente extends javax.swing.JFrame {
                 fila[5] = rs.getString("EMAIL");
                 fila[6] = rs.getString("USUARIO");
                 fila[7] = rs.getString("PASSWORD");
-
+                
                 if (rs.getBoolean("STATUS") == true) {
                     fila[8] = "ACTIVO";
                 } else {
@@ -105,27 +118,27 @@ public class Cliente extends javax.swing.JFrame {
                 }
                 mode1.addRow(fila);
             }
-           
+            
             jTable1.setModel(mode1);
             
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     void Desahabilitar() {
-
+        
         nom1.setEditable(false);
         apa1.setEditable(false);
         ama1.setEditable(false);
         tel1.setEditable(false);
         mai1.setEditable(false);
-
+        
     }
-
+    
     void Limpiar() {
-
+        
         nom1.setText("");
         apa1.setText("");
         ama1.setText("");
@@ -134,18 +147,18 @@ public class Cliente extends javax.swing.JFrame {
         cve_persona.setText("");
         txtPassword.setText("");
         txt_usuario.setText("");
-
+        
     }
-
+    
     void Habilitar() {
-
+        
         nom1.setEditable(true);
         apa1.setEditable(true);
         ama1.setEditable(true);
         tel1.setEditable(true);
         mai1.setEditable(true);
         nom1.requestFocus();
-
+        
     }
 
     /**
@@ -174,7 +187,7 @@ public class Cliente extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         cve_persona = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -182,19 +195,25 @@ public class Cliente extends javax.swing.JFrame {
         txt_usuario = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         label_message_user = new javax.swing.JLabel();
+        btnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.MatteBorder(null), "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 24))); // NOI18N
 
+        nom.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nom.setText("Nombre");
 
+        apa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         apa.setText("Apellido Paterno");
 
+        ama.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ama.setText("Apellido Materno");
 
+        tel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         tel.setText("Telefono");
 
+        mai.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         mai.setText("Correo Electronico");
 
         tipo_empleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Empleado", "Sin Cuenta" }));
@@ -255,19 +274,23 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Menu");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setText("Menu");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
         cve_persona.setEnabled(false);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("IDENTIFICADOR");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Usuario");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Password");
 
         txt_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -276,49 +299,60 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
 
+        btnMenu.setText("Menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mai)
-                            .addComponent(tel)
-                            .addComponent(apa)
-                            .addComponent(ama)
-                            .addComponent(nom)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cve_persona)
-                            .addComponent(tipo_empleado, 0, 250, Short.MAX_VALUE)
-                            .addComponent(ama1)
-                            .addComponent(tel1)
-                            .addComponent(mai1)
-                            .addComponent(nom1)
-                            .addComponent(apa1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_usuario)
-                            .addComponent(txtPassword))
-                        .addGap(18, 18, 18)
-                        .addComponent(label_message_user, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNuevo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(28, 28, 28))
+                        .addComponent(btnNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar)
+                        .addGap(255, 255, 255)
+                        .addComponent(btnExit)
+                        .addGap(58, 58, 58))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(52, 52, 52)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(mai)
+                                .addComponent(tel)
+                                .addComponent(apa)
+                                .addComponent(ama)
+                                .addComponent(nom)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cve_persona)
+                                .addComponent(tipo_empleado, 0, 250, Short.MAX_VALUE)
+                                .addComponent(ama1)
+                                .addComponent(tel1)
+                                .addComponent(mai1)
+                                .addComponent(nom1)
+                                .addComponent(apa1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txt_usuario)
+                                .addComponent(txtPassword))
+                            .addGap(18, 18, 18)
+                            .addComponent(label_message_user, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(583, Short.MAX_VALUE)
+                    .addComponent(btnMenu)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,8 +398,13 @@ public class Cliente extends javax.swing.JFrame {
                     .addComponent(btnNuevo)
                     .addComponent(btnGuardar)
                     .addComponent(btnEliminar)
-                    .addComponent(jButton5))
+                    .addComponent(btnExit))
                 .addGap(26, 26, 26))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(457, Short.MAX_VALUE)
+                    .addComponent(btnMenu)
+                    .addGap(16, 16, 16)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -390,37 +429,37 @@ public class Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tipo_empleadoActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        Menu m = new Menu();
+        Login m = new Login();
         m.setVisible(true);
         dispose();
+        
 
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void asigar_datos(){
-            int row = jTable1.getSelectedRow();
-            cve_persona.setText(jTable1.getValueAt(row, 0).toString());
-            nom1.setText(jTable1.getValueAt(row, 1).toString());
-            apa1.setText(jTable1.getValueAt(row, 2).toString());
-            ama1.setText(jTable1.getValueAt(row, 3).toString());
-            tel1.setText(jTable1.getValueAt(row, 4).toString());
-            mai1.setText(jTable1.getValueAt(row, 5).toString());
-            txt_usuario.setText(jTable1.getValueAt(row, 6).toString());
-            txtPassword.setText(jTable1.getValueAt(row, 7).toString());
-            if (jTable1.getValueAt(row, 8).toString().equals("ACTIVO")) {
-                btnEliminar.setText("DESABILITAR");
-            } else {
-                btnEliminar.setText("HABILITAR");
-            }
-
+    }//GEN-LAST:event_btnExitActionPerformed
+    
+    private void asigar_datos() {
+        int row = jTable1.getSelectedRow();
+        cve_persona.setText(jTable1.getValueAt(row, 0).toString());
+        nom1.setText(jTable1.getValueAt(row, 1).toString());
+        apa1.setText(jTable1.getValueAt(row, 2).toString());
+        ama1.setText(jTable1.getValueAt(row, 3).toString());
+        tel1.setText(jTable1.getValueAt(row, 4).toString());
+        mai1.setText(jTable1.getValueAt(row, 5).toString());
+        txt_usuario.setText(jTable1.getValueAt(row, 6).toString());
+        txtPassword.setText(jTable1.getValueAt(row, 7).toString());
+        if (jTable1.getValueAt(row, 8).toString().equals("ACTIVO")) {
+            btnEliminar.setText("DESABILITAR");
+        } else {
+            btnEliminar.setText("HABILITAR");
+        }
+        
     }
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         if (evt.getButton() == 1) {
             
-          asigar_datos();
+            asigar_datos();
 //            mai1.setText(jTable1.getValueAt(row, 5).toString());
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -428,12 +467,12 @@ public class Cliente extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         String valores[][] = new String[6][2];
         valores = new String[2][2];
-        String status  = "0";
+        String status = "0";
         if (btnEliminar.getText().toString().equals("DESABILITAR")) {
-               status = "0";
-            } else {
-               status = "1";
-            }
+            status = "0";
+        } else {
+            status = "1";
+        }
         
         valores[0][0] = "STATUS";
         valores[0][1] = status;
@@ -463,7 +502,7 @@ public class Cliente extends javax.swing.JFrame {
                 valores[4][0] = "Email";
                 valores[4][1] = mai1.getText();
                 x.insert("personas", valores);
-
+                
                 valores = new String[3][2];
                 valores[0][0] = "usuario";
                 valores[0][1] = txt_usuario.getText();
@@ -514,12 +553,12 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void txt_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usuarioKeyPressed
-
+        
         String name_table = "usuario";
         String busqueda[][] = new String[1][2];
         busqueda[0][0] = "usuario";
         busqueda[0][1] = txt_usuario.getText();
-
+        
         ResultSet rs;
         try {
             rs = x.search(name_table, busqueda);
@@ -537,22 +576,28 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_usuarioKeyPressed
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
-             int row = jTable1.getSelectedRow();
-            cve_persona.setText(jTable1.getValueAt(row, 0).toString());
-            nom1.setText(jTable1.getValueAt(row, 1).toString());
-            apa1.setText(jTable1.getValueAt(row, 2).toString());
-            ama1.setText(jTable1.getValueAt(row, 3).toString());
-            tel1.setText(jTable1.getValueAt(row, 4).toString());
-            mai1.setText(jTable1.getValueAt(row, 5).toString());
-            txt_usuario.setText(jTable1.getValueAt(row, 6).toString());
-            txtPassword.setText(jTable1.getValueAt(row, 7).toString());
-            if (jTable1.getValueAt(row, 8).toString().equals("ACTIVO")) {
-                btnEliminar.setText("DESABILITAR");
-            } else {
-                btnEliminar.setText("HABILITAR");
-            }
+        int row = jTable1.getSelectedRow();
+        cve_persona.setText(jTable1.getValueAt(row, 0).toString());
+        nom1.setText(jTable1.getValueAt(row, 1).toString());
+        apa1.setText(jTable1.getValueAt(row, 2).toString());
+        ama1.setText(jTable1.getValueAt(row, 3).toString());
+        tel1.setText(jTable1.getValueAt(row, 4).toString());
+        mai1.setText(jTable1.getValueAt(row, 5).toString());
+        txt_usuario.setText(jTable1.getValueAt(row, 6).toString());
+        txtPassword.setText(jTable1.getValueAt(row, 7).toString());
+        if (jTable1.getValueAt(row, 8).toString().equals("ACTIVO")) {
+            btnEliminar.setText("DESABILITAR");
+        } else {
+            btnEliminar.setText("HABILITAR");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1KeyPressed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+   Menu m = new Menu(user_data);
+        m.setVisible(true);
+        dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -595,10 +640,11 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel apa;
     private javax.swing.JTextField apa1;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JTextField cve_persona;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

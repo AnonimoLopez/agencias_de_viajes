@@ -147,12 +147,17 @@ public class Login extends javax.swing.JFrame {
                        user_data.setUser(rs.getString("usuario"));
                        user_data.setTipo_empleado(rs.getInt("cve_tipo_usuario"));
                     }
+                    if (user_data.getCve_user().equals("")){
+                    JOptionPane.showMessageDialog(null, "USUARIO NO REGISTRADO");
+                    }else{
+                    
                     System.out.println( "-" +user_data.getTipo_empleado());
                     Menu m = new Menu(user_data);
                     m.setVisible(true);
                    // m.User_data = user_data;
                     dispose();
-                }
+                    }
+                    }
             }
 
         } catch (SQLException ex) {
@@ -163,10 +168,12 @@ public class Login extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-       // JLabel.setText("<html><a href="http:www.google.com/">Enlace</a></html>");
-       Cliente c = new Cliente();
-       c.setVisible(true);
-       dispose();
+       Cliente c;
+     
+            c = new Cliente();
+            c.setVisible(true);
+            dispose();
+       
                
 
     }//GEN-LAST:event_jLabel3MouseClicked

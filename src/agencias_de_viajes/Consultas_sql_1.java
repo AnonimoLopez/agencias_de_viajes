@@ -120,7 +120,10 @@ public class Consultas_sql_1 {
         System.out.println(sql);
         try {
             ps = conn.prepareStatement(sql);
-            ps.executeUpdate();
+           int x = ps.executeUpdate();
+           if (x>0){
+           JOptionPane.showMessageDialog(null, "SE REGISTRO CORRECTAMENTES");
+           }
         } catch (SQLException ex) {
             Logger.getLogger(Consultas_sql_1.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -147,7 +150,10 @@ public class Consultas_sql_1 {
         System.out.println(sql);
         try {
             ps = conn.prepareStatement(sql);
-            ps.executeUpdate();
+         int x=   ps.executeUpdate();
+              if (x>0){
+           JOptionPane.showMessageDialog(null, "SE REGISTRO CORRECTAMENTES");
+           }
         } catch (SQLException ex) {
             Logger.getLogger(Consultas_sql_1.class.getName()).log(Level.SEVERE, null, ex);
         }
