@@ -20,7 +20,7 @@ public class Paquete extends javax.swing.JFrame {
     DefaultTableModel mode1;
     Connection conn;
     Statement sent;
-
+public User user_data;
     /**
      * Creates new form Paquete
      */
@@ -28,7 +28,17 @@ public class Paquete extends javax.swing.JFrame {
 
         initComponents();
         conn = Conectar.geConnection();
+        this.setLocationRelativeTo(null);
         Llenar();
+
+    }
+    public Paquete(User user) {
+
+        initComponents();
+        conn = Conectar.geConnection();
+        this.setLocationRelativeTo(null);
+        Llenar();
+        user_data = user;
 
     }
 
@@ -239,7 +249,7 @@ public class Paquete extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        Menu m = new Menu();
+        Menu m = new Menu(user_data);
         m.setVisible(true);
         dispose();
 

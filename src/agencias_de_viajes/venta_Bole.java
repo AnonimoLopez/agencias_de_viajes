@@ -14,6 +14,15 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -31,6 +40,7 @@ public class venta_Bole extends javax.swing.JFrame {
     double total;
     int cve_paquete_destino;
     Consultas_sql_1 x = new Consultas_sql_1();
+    public User user_data;
 
     public venta_Bole() {
         initComponents();
@@ -40,6 +50,16 @@ public class venta_Bole extends javax.swing.JFrame {
         cargar_Cliente();
         Llenar();
 
+    }
+
+    public venta_Bole(User user) {
+        initComponents();
+        conn = Conectar.geConnection();
+        cargar_Paquete();
+        cargar_Destino();
+        cargar_Cliente();
+        Llenar();
+        user_data = user;
     }
 
     private void cargar_Paquete() {
@@ -67,7 +87,7 @@ public class venta_Bole extends javax.swing.JFrame {
             DefaultComboBoxModel model_combox = new DefaultComboBoxModel();
 
             String sql = "";
-   String valor[] = (cbxPaquete.getSelectedItem().toString()).split("-");
+            String valor[] = (cbxPaquete.getSelectedItem().toString()).split("-");
             sql = "SELECT paquete_destino.cve_paquete_destino, concat(paquete_destino.cve_paquete_destino, '-' ,ciudad.NOMBRE) , paquete_destino.costo, paquete_destino.Asientos_disponibles FROM  paquete_destino inner join paquete on paquete_destino.cve_paquete = paquete.cve_paquete inner join ciudad on ciudad.CVE_CIUDAD = paquete_destino.cve_ciudad inner join avion on  avion.CVE_AVION  inner join personas on personas.CVE_PERSONA = avion.CVE_PILOTO\n"
                     + "where paquete.cve_paquete = " + valor[0];
 
@@ -77,7 +97,7 @@ public class venta_Bole extends javax.swing.JFrame {
                 model_combox.addElement(rs.getString(2));
             }
             CbxDestino.setModel(model_combox);
-          llenar_txt();
+            llenar_txt();
         } catch (SQLException ex) {
             Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,7 +119,6 @@ public class venta_Bole extends javax.swing.JFrame {
                 txtCostoDeBoleto.setText(rs.getString(3));
                 txtNumeroDeBoletoDisponible.setText(rs.getString(4));
             }
-         
 
         } catch (SQLException ex) {
             Logger.getLogger(Destino.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,7 +161,8 @@ public class venta_Bole extends javax.swing.JFrame {
         }
 
     }
-     void Llenar_p(String nombre) {
+
+    void Llenar_p(String nombre) {
 
         try {
 
@@ -234,8 +254,10 @@ public class venta_Bole extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
         nombre = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -372,11 +394,18 @@ public class venta_Bole extends javax.swing.JFrame {
             }
         });
 
+        btnImprimir.setText("Imprimir");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -401,14 +430,16 @@ public class venta_Bole extends javax.swing.JFrame {
                         .addComponent(txtCostoDeBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(214, 214, 214))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(214, 214, 214))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap()))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,15 +467,21 @@ public class venta_Bole extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(txt_cambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnImprimir))
         );
 
-        nombre.setText("jTextField1");
-
-        jButton4.setText("jButton4");
+        jButton4.setText("BUSCAR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("MENU");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -464,7 +501,9 @@ public class venta_Bole extends javax.swing.JFrame {
                         .addComponent(jButton4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(512, 512, 512))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addGap(433, 433, 433))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1429, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -472,15 +511,19 @@ public class venta_Bole extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton4))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4))))
+                        .addGap(70, 70, 70)
+                        .addComponent(jButton5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -586,12 +629,24 @@ public class venta_Bole extends javax.swing.JFrame {
     }//GEN-LAST:event_CbxDestinoItemStateChanged
 
     private void cbxPaqueteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxPaqueteItemStateChanged
-cargar_Destino();        // TODO add your handling code here:
+        cargar_Destino();        // TODO add your handling code here:
     }//GEN-LAST:event_cbxPaqueteItemStateChanged
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Llenar_p(nombre.getText());
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        Menu m = new Menu(user_data);
+        m.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        // TODO add your handling code here:
+        imprimir();
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
     void limpiar() {
         txtTotal.setText("");
@@ -616,6 +671,91 @@ cargar_Destino();        // TODO add your handling code here:
         }
         return true;
     }
+
+    void imprimir() {
+         String valor[] = (CbxCliente.getSelectedItem().toString()).split("-");
+              Date date = new Date();
+       DateFormat hourFormat = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+    String name = valor[0] +"_" +(hourFormat.format(date).toString());
+        Document documento = new Document();
+        FileOutputStream ficheroPdf;
+        try {
+            ficheroPdf = new FileOutputStream("src/"+name+".PDF");
+            PdfWriter.getInstance(
+                    documento,
+                    ficheroPdf
+            ).setInitialLeading(20);
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        try {
+            documento.open();
+           
+//            documento.add(new Paragraph("CUENTA CLIENTE: " + valor[0]));
+//            documento.add(new Paragraph("CLIENTE: " + valor[1]));
+//            documento.add(new Paragraph("No de Boletos: " + txtNumeroDeBoleto.getText()));
+//            documento.add(new Paragraph("SUBTOTAL: " + TxtSubtotal.getText()));
+//            documento.add(new Paragraph("IVA: 0.16%"));
+//            documento.add(new Paragraph("TOTAL: " + txtTotal.getText()));
+//            documento.add(new Paragraph("EFECTIVO: " + txtEfectivo.getText()));
+//            documento.add(new Paragraph("CAMBIO " + txt_cambio.getText()));
+//           Paragraph parrafo2 = new Paragraph("nuestro segundo Texto");
+//            parrafo2.setAlignment(1);//el 1 es para centrar
+//            documento.add(parrafo2);
+            documento.add(new Paragraph(" "));
+           //AQUÍ EMPIEZA (USA LA IMAGINACIÓN)
+                PdfPTable tabla = new PdfPTable(2);
+            tabla.addCell("CUENTA CLIENTE:");
+            tabla.addCell(valor[0]);
+            documento.add(tabla);  
+            tabla = new PdfPTable(2);
+            tabla.addCell("CLIENTE:");
+            tabla.addCell(valor[1]);
+            documento.add(tabla);
+             tabla = new PdfPTable(2);
+            tabla.addCell("No de Boletos:");
+            tabla.addCell(txtNumeroDeBoleto.getText());
+            documento.add(tabla);
+             tabla = new PdfPTable(2);
+            tabla.addCell("SUBTOTAL: " );
+            tabla.addCell(TxtSubtotal.getText());
+            documento.add(tabla);
+             tabla = new PdfPTable(2);
+            tabla.addCell("IVA: ");
+            tabla.addCell("0.16%");
+            documento.add(tabla);
+             tabla = new PdfPTable(2);
+            tabla.addCell("TOTAL: ");
+            tabla.addCell(  txtTotal.getText());
+            documento.add(tabla);
+             tabla = new PdfPTable(2);
+            tabla.addCell("EFECTIVO: " );
+            tabla.addCell(txtEfectivo.getText());
+            documento.add(tabla);
+             tabla = new PdfPTable(2);
+            tabla.addCell("CAMBIO " );
+            tabla.addCell(txt_cambio.getText());
+            documento.add(tabla);
+            
+           
+       
+
+
+            documento.close();
+            try {
+                File path = new File("src/"+name+".PDF");
+                Desktop.getDesktop().open(path);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }
+    
+    
+
 
     /**
      * @param args the command line arguments
@@ -656,11 +796,13 @@ cargar_Destino();        // TODO add your handling code here:
     private javax.swing.JComboBox<String> CbxCliente;
     private javax.swing.JComboBox<String> CbxDestino;
     private javax.swing.JTextField TxtSubtotal;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JComboBox<String> cbxPaquete;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

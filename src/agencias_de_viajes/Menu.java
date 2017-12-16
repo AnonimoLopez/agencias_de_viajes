@@ -25,6 +25,7 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
 //        System.out.println(User_data.getTipo_empleado());
     }
@@ -32,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu(User user) {
       
         initComponents();
+        this.setLocationRelativeTo(null);
         User_data = user;
         System.out.println(User_data.getTipo_empleado());
     }
@@ -51,15 +53,21 @@ public class Menu extends javax.swing.JFrame {
         cliente = new javax.swing.JMenuItem();
         destino = new javax.swing.JMenuItem();
         paquete = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/4.jpg"))); // NOI18N
+
         jMenu1.setText("CATALOGOS");
 
+        cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/new_1.png"))); // NOI18N
         cliente.setText("Cliente");
         cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +76,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(cliente);
 
+        destino.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/new_1.png"))); // NOI18N
         destino.setText("Destino");
         destino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +85,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(destino);
 
+        paquete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/new_1.png"))); // NOI18N
         paquete.setText("Paquetes");
         paquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,21 +94,40 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(paquete);
 
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("VENTA");
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/cash.png"))); // NOI18N
         jMenuItem2.setText("VENTA");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu2.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("CONSULTAS");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("CONSULTAS");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jCheckBoxMenuItem1);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu4.setText("ACERCA DE");
 
         jMenuItem3.setText("INFORMACION");
         jMenu4.add(jMenuItem3);
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/exit.png"))); // NOI18N
         jMenuItem4.setText("SALIR");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,17 +144,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblfondo, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(lblfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblfondo, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(lblfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -154,7 +177,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void destinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinoActionPerformed
         // TODO add your handling code here:
-        Destino d = new Destino();
+        Destino d = new Destino(User_data);
 
         d.setVisible(true);
         dispose();
@@ -163,7 +186,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void paqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paqueteActionPerformed
         // TODO add your handling code here:
-        Paquete p = new Paquete();
+        Paquete p = new Paquete(User_data);
         p.setVisible(true);
         dispose();
     }//GEN-LAST:event_paqueteActionPerformed
@@ -174,11 +197,18 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        venta_Bole c = new venta_Bole();
+        venta_Bole c = new venta_Bole(User_data);
         c.setVisible(true);
         dispose();
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        consultas c =new consultas(User_data);
+        c.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +248,10 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cliente;
     private javax.swing.JMenuItem destino;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;

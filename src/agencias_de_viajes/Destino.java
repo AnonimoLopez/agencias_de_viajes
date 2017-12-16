@@ -23,14 +23,24 @@ public class Destino extends javax.swing.JFrame {
     DefaultTableModel mode1;
     Connection conn;
     Statement sent;
-
+ public User user_data;
     /**
      * Creates new form Destino //
      */
     public Destino() {
         initComponents();
+        this.setLocationRelativeTo(null);
         conn = Conectar.geConnection();
         cargar_continente();
+        // Llenar();
+    }
+
+      public Destino(User user) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        conn = Conectar.geConnection();
+        cargar_continente();
+        user_data = user;
         // Llenar();
     }
 //     void Desahabilitar() {
@@ -521,7 +531,7 @@ void estado_ciudad(Boolean estado) {
     private void agregar_paisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_paisActionPerformed
         // TODO add your handling code here:
          if (txt_pais.getText().equals("")){
-               JOptionPane.showMessageDialog(this, "POR FAVOR INGRESE UNA CIUDAD");
+               JOptionPane.showMessageDialog(this, "POR FAVOR INGRESE UN PAIS");
          
                 
              }else{
@@ -563,7 +573,7 @@ void estado_ciudad(Boolean estado) {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:}
-        Menu m = new Menu();
+        Menu m = new Menu(user_data);
         m.setVisible(true);
         dispose();
         
